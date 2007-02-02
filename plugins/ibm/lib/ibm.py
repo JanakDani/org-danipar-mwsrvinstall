@@ -137,7 +137,7 @@ class Package():
                         )
             elif self.config['repo_option'] == Package.__repoOnline:
                 Package.imcl_install(self.config['imcl'], self.config['install_root'], self.config['imshared_root'],
-                        os.path.join(self.config['target_loc']),
+                        os.path.join(self.config['target_loc'], self.config['offering_id']),
                         self.config['offering_id'], self.config['offering_version'], self.config['offering_features'],
                         self.config['offering_properties'], self.config['offering_preferences']
                         )
