@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <diom>
     <Vendor NAME="IBM">
-        <Package NAME="com.ibm.websphere.IHS.v80" VERSION="8.0.0.0" BUILD="8.0.0.20110503_0200" SUMMARY="IBM HTTP Server" default="false">
+        <Package NAME="com.ibm.websphere.IHS.v80" VERSION="8.0.0.0" BUILD="8.0.0.20110503_0200" SUMMARY="IBM HTTP Server" default="true">
             <OS SYSTEM="Linux:x86_32,Linux:x86_64,SunOS:i86pc,SunOS:sun4v">
                 <FILENAME>com.ibm.websphere.WCT.v80.zip</FILENAME>
                 <LOCATION>../was/v80</LOCATION>

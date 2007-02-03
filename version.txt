@@ -1,2 +1,2 @@
-* [31m3f9a8a5[m -[33m (HEAD, release-1.1.7, feature-changediom)[m 
-|  [32m(Fri Feb 2 21:16:59 2007 -0500)[m 
+* [31mafb8fa9[m -[33m (HEAD, release-1.1.8, feature-defaultversion)[m 
+|  [32m(Sat Feb 3 06:52:48 2007 -0500)[m 

@@ -16,7 +16,7 @@ class ArgParser():
         ibm_install_parser = ibm_subparsers.add_parser('install', help='Install Software')
         ibm_install_parser.add_argument('-profile', action='store', required=True, help='profile name')
         ibm_install_parser.add_argument('-configFile', type=argparse.FileType('r'), required=True, help='Property file')
-        ibm_install_parser.add_argument('-version', required=True, help='Version')
+        ibm_install_parser.add_argument('-version', required=False, help='Version')
 
         # A uninstall command
         ibm_uninstall_parser = ibm_subparsers.add_parser('uninstall', help='Uninstall software')
