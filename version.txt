@@ -1,2 +1,2 @@
-*   [31m9a322a2[m -[33m (HEAD, 1.1.6, master)[m 
-|\   [32m(Fri Feb 2 11:04:32 2007 -0500)[m 
+* [31m3f9a8a5[m -[33m (HEAD, release-1.1.7, feature-changediom)[m 
+|  [32m(Fri Feb 2 21:16:59 2007 -0500)[m 

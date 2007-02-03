@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <diom>
     <Vendor NAME="IBM">
-        <Package NAME="IBM Installation Manager" VERSION="1.6.0" OFFERING_VERSION="1.6.0.20120831_1216" OFFERING_ID="com.ibm.cic.agent" default="true">
+        <Package NAME="com.ibm.cic.agent" VERSION="1.6.0" BUILD="1.6.0.20120831_1216" SUMMARY="IBM Installation Manager" default="true">
             <OS SYSTEM="Linux:x86_32,Linux:x86_64">
                 <FILENAME>agent.installer.linux.gtk.x86_1.6.0.20120831_1216.zip</FILENAME>
                 <LOCATION>../im/linux/x86_32</LOCATION>
@@ -11,7 +11,7 @@
                 <LOCATION>../im/solaris/x86</LOCATION>
             </OS>
         </Package>
-        <Package NAME="IBM Installation Manager" VERSION="1.5.3" OFFERING_VERSION="1.5.3000.20120531_1954" OFFERING_ID="com.ibm.cic.agent" default="false">
+        <Package NAME="com.ibm.cic.agent" VERSION="1.5.3" BUILD="1.5.3000.20120531_1954" SUMMARY="IBM Installation Manager" default="false">
             <OS SYSTEM="Linux:x86_32,Linux:x86_64">
                 <FILENAME>agent.installer.linux.gtk.x86_1.5.3000.20120531_1954.zip</FILENAME>
                 <LOCATION>../im/linux/x86_32</LOCATION>
@@ -21,7 +21,7 @@
                 <LOCATION>../im/solaris/x86</LOCATION>
             </OS>
         </Package>
-        <Package NAME="IBM Installation Manager" VERSION="1.5.2" OFFERING_VERSION="1.5.2000.20120223_0907" OFFERING_ID="com.ibm.cic.agent" default="false">
+        <Package NAME="com.ibm.cic.agent" VERSION="1.5.2" BUILD="1.5.2000.20120223_0907" SUMMARY="IBM Installation Manager" default="false">
             <OS SYSTEM="Linux:x86_32,Linux:x86_64">
                 <FILENAME>agent.installer.linux.gtk.x86_1.5.2000.20120223_0907.zip</FILENAME>
                 <LOCATION>../im/linux/x86_32</LOCATION>
@@ -31,7 +31,7 @@
                 <LOCATION>../im/solaris/x86</LOCATION>
             </OS>
         </Package>
-        <Package NAME="IBM Installation Manager" VERSION="1.4.4" OFFERING_VERSION="1.4.4000.20110525_1254" OFFERING_ID="com.ibm.cic.agent" default="false">
+        <Package NAME="com.ibm.cic.agent" VERSION="1.4.4" BUILD="1.4.4000.20110525_1254" SUMMARY="IBM Installation Manager" default="false">
             <OS SYSTEM="Linux:x86_32,Linux:x86_64">
                 <FILENAME>agent.installer.linux.gtk.x86_1.4.4000.20110525_1254.zip</FILENAME>
                 <LOCATION>../im/linux/x86_32</LOCATION>

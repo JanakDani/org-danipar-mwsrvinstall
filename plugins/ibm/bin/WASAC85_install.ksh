@@ -12,4 +12,4 @@ if [[ $(echo ${home_dir##*/}) == $(echo ${plg_name} | tr '[:upper:]' '[:lower:]'
 fi
 
 export PYTHONPATH=${home_dir}:${PYTHONPATH}
-python2.7 ${home_dir} ${plg_name} install -offeringProfile=APPCLIENT85 -configFile=${plg_dir}/samples/wasnd-default.ini "$@"
+python2.7 ${home_dir} ${plg_name} install -profile=APPCLIENT85 -configFile=${plg_dir}/samples/wasnd-default.ini "$@"
