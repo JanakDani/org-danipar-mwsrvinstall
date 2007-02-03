@@ -1,3 +1,15 @@
+* commit 3f9a8a55026b73398bc045a283e354d099a61c7c
+| Author: Janak Dani <Janak.Dani@danipar.com>
+| Date:   Fri Feb 2 21:16:59 2007 -0500
+| 
+|     updated verbiage for diom
+|  
+* commit c2f0e82d2520bb158bc5c436b4ef183801b9cdde
+| Author: Janak Dani <Janak.Dani@danipar.com>
+| Date:   Fri Feb 2 13:13:39 2007 -0500
+| 
+|     updated changelog and version file for 1.1.6
+|    
 *   commit 9a322a2ce43b4d405b61907054f5cb80e4faff22
 |\  Merge: 922cd12 6b0e984
 | | Author: Janak Dani <Janak.Dani@danipar.com>
