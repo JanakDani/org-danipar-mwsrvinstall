@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <diom>
     <Vendor NAME="IBM">
-        <Package NAME="com.ibm.cic.agent" VERSION="1.6.0" BUILD="1.6.0.20120831_1216" SUMMARY="IBM Installation Manager" default="true">
+        <Package NAME="com.ibm.cic.agent" VERSION="1.6.0" BUILD="1.6.0.20120831_1216" SUMMARY="IBM Installation Manager" default="false">
             <OS SYSTEM="Linux:x86_32,Linux:x86_64">
                 <FILENAME>agent.installer.linux.gtk.x86_1.6.0.20120831_1216.zip</FILENAME>
                 <LOCATION>../im/linux/x86_32</LOCATION>
@@ -11,7 +11,7 @@
                 <LOCATION>../im/solaris/x86</LOCATION>
             </OS>
         </Package>
-        <Package NAME="com.ibm.cic.agent" VERSION="1.5.3" BUILD="1.5.3000.20120531_1954" SUMMARY="IBM Installation Manager" default="false">
+        <Package NAME="com.ibm.cic.agent" VERSION="1.5.3" BUILD="1.5.3000.20120531_1954" SUMMARY="IBM Installation Manager" default="true">
             <OS SYSTEM="Linux:x86_32,Linux:x86_64">
                 <FILENAME>agent.installer.linux.gtk.x86_1.5.3000.20120531_1954.zip</FILENAME>
                 <LOCATION>../im/linux/x86_32</LOCATION>
