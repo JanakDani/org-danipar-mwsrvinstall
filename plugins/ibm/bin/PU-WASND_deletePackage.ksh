@@ -12,4 +12,4 @@ if [[ $(echo ${home_dir##*/}) == $(echo ${plg_name} | tr '[:upper:]' '[:lower:]'
 fi
 
 export PYTHONPATH=${home_dir}:${PYTHONPATH}
-python2.7 ${home_dir} ${plg_name} delete-package -offeringProfile=PackagingUtility -packageName='IBM WebSphere Application Server Network Deployment' -configFile=/root/bin/mwsrvinstall/examples/pu-wasnd.ini "$@"
+python2.7 ${home_dir} ${plg_name} delete-package -profile=PackagingUtility -packageName='IBM WebSphere Application Server Network Deployment' -configFile=/root/bin/mwsrvinstall/examples/pu-wasnd.ini "$@"

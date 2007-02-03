@@ -12,4 +12,4 @@ if [[ $(echo ${home_dir##*/}) == $(echo ${plg_name} | tr '[:upper:]' '[:lower:]'
 fi
 
 export PYTHONPATH=${home_dir}:${PYTHONPATH}
-python2.7 ${home_dir} ${plg_name} uninstall -offeringProfile=IHS85 -configFile=${plg_dir}/samples/ihs-default.ini "$@"
+python2.7 ${home_dir} ${plg_name} uninstall -profile=IHS85 -configFile=${plg_dir}/samples/ihs-default.ini "$@"

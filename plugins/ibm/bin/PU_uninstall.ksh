@@ -12,4 +12,4 @@ if [[ $(echo ${home_dir##*/}) == $(echo ${plg_name} | tr '[:upper:]' '[:lower:]'
 fi
 
 export PYTHONPATH=${home_dir}:${PYTHONPATH}
-python2.7 ${home_dir} ${plg_name} uninstall -offeringProfile=PackagingUtility -configFile=${plg_dir}/samples/pu-default.ini "$@"
+python2.7 ${home_dir} ${plg_name} uninstall -profile=PackagingUtility -configFile=${plg_dir}/samples/pu-default.ini "$@"

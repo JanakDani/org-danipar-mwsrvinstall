@@ -22,19 +22,19 @@ class InstallationManager():
 
     @staticmethod
     def install(exec_script, im_install_root, imdl_install_root, imshared_root, repository,
-                offering_id, offering_version=None, offering_features=None):
+                packagename, packagebuild=None, offering_features=None):
         """Installs installation manager
         """
         logger.debug("Setting up imcl cmd")
 
-        offering_str = offering_id
-        if offering_version != None:
-            offering_str += '_' + offering_version
+        offering_str = packagename
+        if packagebuild != None:
+            offering_str += '_' + packagebuild
         if offering_features != None:
             offering_str += ',' + offering_features
 
         cmd =   ( exec_script +
-                " install " + offering_id +
+                " install " + packagename +
                 " -repositories " + repository +
                 " -installationDirectory " + os.path.join(im_install_root, 'eclipse') +
                 " -dataLocation " + imdl_install_root +
@@ -55,14 +55,14 @@ class Package():
     """Install/rollback/uninstall Packages
     For Packaging utility, copy or delete packages
     """
-    __oprofileIM = 'InstallationManager'
+    __profileIM = 'InstallationManager'
     __repoOnline = 'Online_Repo'
     __repoLocal = 'Local_Repo'
-    __packageNameIM = 'IBM Installation Manager'
-    __packageNamePU = 'IBM Packaging Utility'
+    __pkg_nameIM = 'com.ibm.cic.agent'
+    __pkg_namePU = 'com.ibm.cic.packagingUtility'
 
-    def __init__(self, vendorname, oprofile, configFile, version=None):
-        self.oprofile = oprofile
+    def __init__(self, vendorname, profile, configFile, version=None):
+        self.profile = profile
         self.configFile = configFile
         self.version = version
         self.setConfig(vendorname)
@@ -73,19 +73,19 @@ class Package():
         (self.sysName, nodeName, release, version, self.machine) = os.uname()
         logger.debug("System Information: %s(OS), %s(HOST), %s(Release), %s(ARCH)", self.sysName, nodeName, release, self.machine)
         self.config.update(propsparser.ini(self.configFile, scope=['Root'])['Root'])
-        self.config.update(propsparser.ini(self.configFile, scope=[self.oprofile])[self.oprofile])
+        self.config.update(propsparser.ini(self.configFile, scope=[self.profile])[self.profile])
 
         ## Load IM if Package is not IM
-        if self.config['packagename'] != Package.__packageNameIM:
+        if self.config['pkg_name'] != Package.__pkg_nameIM:
             self.config.update(propsparser.ini(self.configFile,
-                                scope=[Package.__oprofileIM])[Package.__oprofileIM])
-            self.config.update(propsparser.ini(self.configFile, scope=[self.oprofile])[self.oprofile])
-        self.config['offering_profile'] = self.oprofile
+                                scope=[Package.__profileIM])[Package.__profileIM])
+            self.config.update(propsparser.ini(self.configFile, scope=[self.profile])[self.profile])
+        self.config['profile'] = self.profile
         self.config['imcl'] = os.path.join(self.config['im_install_root'],'eclipse','tools','imcl')
 
         ## Load local repo if package is IM or PU
-        if self.config['packagename'] == Package.__packageNameIM or \
-        self.config['packagename'] == Package.__packageNamePU:
+        if self.config['pkg_name'] == Package.__pkg_nameIM or \
+        self.config['pkg_name'] == Package.__pkg_namePU:
                 self.config.update(propsparser.ini(self.configFile,
                                     scope=[Package.__repoLocal])[Package.__repoLocal])
         else:
@@ -96,18 +96,17 @@ class Package():
         # Read online and download software
         xml = diomreader.XMLReader(url=self.config['url'], file=self.config['dm_file'],
                                 sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'],
-                                packageName=self.config['packagename'], version=self.version)
-        print self.config
+                                packageName=self.config['pkg_name'], version=self.version)
         self.config.update(xml.getSWDownloadDetails())
 
-        if self.config['packagename'] != Package.__packageNameIM and \
+        if self.config['packagename'] != Package.__pkg_nameIM and \
         not os.path.isdir(self.config['im_install_root']):
             raise Exception('Installation Manager not found installed')
 
         if self.config['repo_option'] == Package.__repoLocal:
             download.Download(self.config['url'], self.config['fileName'], self.config['target_loc'])
 
-        if self.config['packagename'] == Package.__packageNameIM:
+        if self.config['packagename'] == Package.__pkg_nameIM:
             InstallationManager.install(os.path.join(self.config['target_loc'],
                                                      self.config['fileName'].rstrip('.zip'),
                                                      'tools', 'imcl'),
@@ -116,13 +115,13 @@ class Package():
                                         self.config['imshared_root'],
                                         os.path.join(self.config['target_loc'],
                                                                    self.config['fileName'].rstrip('.zip')),
-                                        self.config['offering_id'],
-                                        self.config['offering_version']
+                                        self.config['packagename'],
+                                        self.config['packagebuild']
                         )
-        elif self.config['packagename'] == Package.__packageNamePU:
+        elif self.config['packagename'] == Package.__pkg_namePU:
             Package.imcl_install(self.config['imcl'], self.config['install_root'], self.config['imshared_root'],
                         os.path.join(self.config['target_loc'], self.config['fileName'].rstrip('.zip')),
-                        self.config['offering_id'], self.config['offering_version']
+                        self.config['packagename'], self.config['packagebuild']
                         )
         else:
             if not self.config.has_key('offering_properties') or self.config['offering_properties'] == "":
@@ -132,18 +131,18 @@ class Package():
             if self.config['repo_option'] == Package.__repoLocal:
                 Package.imcl_install(self.config['imcl'], self.config['install_root'], self.config['imshared_root'],
                         os.path.join(self.config['target_loc'], self.config['fileName'].rstrip('.zip')),
-                        self.config['offering_id'], self.config['offering_version'], self.config['offering_features'],
+                        self.config['packagename'], self.config['packagebuild'], self.config['offering_features'],
                         self.config['offering_properties'], self.config['offering_preferences']
                         )
             elif self.config['repo_option'] == Package.__repoOnline:
                 Package.imcl_install(self.config['imcl'], self.config['install_root'], self.config['imshared_root'],
-                        os.path.join(self.config['target_loc'], self.config['offering_id']),
-                        self.config['offering_id'], self.config['offering_version'], self.config['offering_features'],
+                        os.path.join(self.config['target_loc'], self.config['packagename']),
+                        self.config['packagename'], self.config['packagebuild'], self.config['offering_features'],
                         self.config['offering_properties'], self.config['offering_preferences']
                         )
 
     def uninstall(self):
-        if self.config['packagename'] == Package.__packageNameIM:
+        if self.config['pkg_name'] == Package.__pkg_nameIM:
             InstallationManager.uninstall(self.config['imdl_install_root'])
         else:
             cmd =   (self.config['imcl'] +
@@ -155,10 +154,10 @@ class Package():
                 if line == '': continue
                 (installed_loc,packageid_ver,displayName,displayVersion) = line.split(" : ")
                 if installed_loc == self.config['install_root']:
-                    self.config['offering_id'], self.config['offering_version'] = packageid_ver.split('_',1)
+                    self.config['pkg_name'], self.config['packagebuild'] = packageid_ver.split('_',1)
 
             Package.imcl_uninstall(self.config['imcl'], self.config['install_root'],
-                    self.config['offering_id'], self.config['offering_version']
+                    self.config['pkg_name'], self.config['packagebuild']
                     )
 
     def rollback(self):
@@ -167,14 +166,14 @@ class Package():
             if self.config['repo_option'] == Package.__repoLocal:
                 xml = diomreader.XMLReader(url=self.config['url'], file=self.config['dm_file'],
                                 sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'],
-                                packageName=self.config['packagename'], version=self.version)
+                                packageName=self.config['pkg_name'], version=self.version)
                 self.config.update(xml.getSWDownloadDetails())
             elif self.config['repo_option'] == Package.__repoOnline:
                 for line in self.imcl_getAvailablePackages(self.config['target_loc']).split("\n"):
                     if line == '': continue
                     (repo,packageid_ver,displayName,displayVersion) = line.split(" : ")
-                    if displayVersion == self.version and str(displayName) == self.config['packagename']:
-                        self.config['offering_id'], self.config['offering_version'] = packageid_ver.split('_',1)
+                    if displayVersion == self.version and str(displayName) == self.config['pkg_name']:
+                        self.config['packagename'], self.config['packagebuild'] = packageid_ver.split('_',1)
         else:
             cmd =   (self.config['imcl'] +
                     " listInstalledPackages " +
@@ -185,11 +184,11 @@ class Package():
                 if line == '': continue
                 (installed_loc,packageid_ver,displayName,displayVersion) = line.split(" : ")
                 if installed_loc == self.config['install_root']:
-                    self.config['offering_id'] = packageid_ver.split('_',1)[0]
-                    self.config['offering_version'] = None
+                    self.config['packagename'] = packageid_ver.split('_',1)[0]
+                    self.config['packagebuild'] = None
 
         Package.imcl_rollback(self.config['imcl'], self.config['install_root'],
-                self.config['offering_id'], self.config['offering_version']
+                self.config['packagename'], self.config['packagebuild']
                 )
 
     def copy_package(self, packageName):
@@ -200,8 +199,8 @@ class Package():
         download.Download(self.config['url'], self.config['fileName'], self.config['target_loc'])
         Package.pucl_copy(os.path.join(self.config['install_root'], 'PUCL'), 'copy',
                     os.path.join(self.config['target_loc'],self.config['fileName'].rstrip('.zip')),
-                    os.path.join(self.config['pu_local_target'],self.config['offering_id']),
-                    self.config['offering_id'], self.config['offering_version']
+                    os.path.join(self.config['pu_local_target'],self.config['packagename']),
+                    self.config['packagename'], self.config['packagebuild']
                     )
 
     def delete_package(self, packageName):
@@ -209,11 +208,11 @@ class Package():
             if line == '': continue
             (repo,packageid_ver,displayName,displayVersion) = line.split(" : ")
             if displayVersion == self.version and str(displayName) == str(packageName):
-                self.config['offering_id'], self.config['offering_version'] = packageid_ver.split('_',1)
+                self.config['packagename'], self.config['packagebuild'] = packageid_ver.split('_',1)
 
         Package.pucl_delete(os.path.join(self.config['install_root'], 'PUCL'), 'delete',
-                    os.path.join(self.config['pu_local_target'],self.config['offering_id']),
-                    self.config['offering_id'], self.config['offering_version']
+                    os.path.join(self.config['pu_local_target'],self.config['packagename']),
+                    self.config['packagename'], self.config['packagebuild']
                     )
 
     def imcl_getAvailablePackages(self, repo):
@@ -227,12 +226,12 @@ class Package():
 
     @staticmethod
     def imcl_install(exec_script, install_root, imshared_root, repository,
-                offering_id, offering_version=None, offering_features=None,
+                packagename, packagebuild=None, offering_features=None,
                 offering_properties=None, offering_preferences=None):
         logger.debug("Setting up cmd")
-        offering_str = offering_id
-        if offering_version != None:
-            offering_str += '_' + offering_version
+        offering_str = packagename
+        if packagebuild != None:
+            offering_str += '_' + packagebuild
         if offering_features != None:
             offering_str += ',' + offering_features
         cmd =   ( exec_script +
@@ -250,11 +249,11 @@ class Package():
 
     @staticmethod
     def imcl_rollback(exec_script, install_root,
-                offering_id, offering_version=None, offering_features=None):
+                packagename, packagebuild=None, offering_features=None):
         logger.debug("Setting up cmd")
-        offering_str = offering_id
-        if offering_version != None:
-            offering_str += '_' + offering_version
+        offering_str = packagename
+        if packagebuild != None:
+            offering_str += '_' + packagebuild
         if offering_features != None:
             offering_str += ',' + offering_features
         cmd =   ( exec_script +
@@ -267,10 +266,10 @@ class Package():
         (ret_code, output) = shell.Shell.runCmd(cmd)
 
     @staticmethod
-    def imcl_uninstall(exec_script, install_root, offering_id, offering_version=None, offering_features=None):
-        offering_str = offering_id
-        if offering_version != None:
-            offering_str += '_' + offering_version
+    def imcl_uninstall(exec_script, install_root, packagename, packagebuild=None, offering_features=None):
+        offering_str = packagename
+        if packagebuild != None:
+            offering_str += '_' + packagebuild
         if offering_features != None:
             offering_str += ',' + offering_features
         cmd =   (exec_script +
@@ -280,12 +279,12 @@ class Package():
         (ret_code, output) = shell.Shell.runCmd(cmd)
 
     @staticmethod
-    def pucl_copy(exec_script, command, repository, target, offering_id=None, offering_version=None):
+    def pucl_copy(exec_script, command, repository, target, packagename=None, packagebuild=None):
         offering_str = ""
-        if offering_id != None:
-            offering_str = offering_id
-            if offering_version != None:
-                offering_str += '_' + offering_version
+        if packagename != None:
+            offering_str = packagename
+            if packagebuild != None:
+                offering_str += '_' + packagebuild
         cmd =   (exec_script +
                 " " + command + " " + offering_str +
                 " -repositories " + repository +
@@ -295,10 +294,10 @@ class Package():
         (ret_code, output) = shell.Shell.runCmd(cmd)
 
     @staticmethod
-    def pucl_delete(exec_script, command, target, offering_id, offering_version=None):
-        offering_str = offering_id
-        if offering_version != None:
-            offering_str += '_' + offering_version
+    def pucl_delete(exec_script, command, target, packagename, packagebuild=None):
+        offering_str = packagename
+        if packagebuild != None:
+            offering_str += '_' + packagebuild
         cmd =   (exec_script +
                 " " + command + " " + offering_str +
                 " -target " + target
