@@ -1,2 +1,2 @@
-* 10df696 - (HEAD, ibmihsfeature)
-|  (Tue Jan 15 23:10:57 2013 -0500)
+* [31m3f9a8a5[m -[33m (HEAD, release-1.1.7, feature-changediom)[m 
+|  [32m(Fri Feb 2 21:16:59 2007 -0500)[m 

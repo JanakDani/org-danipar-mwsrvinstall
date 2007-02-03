@@ -78,9 +78,9 @@ class XMLReader():
                     dict(packageNode.attributes.items())['NAME'] == self.packageName:
                         dict_temp = dict(packageNode.attributes.items())
                         dicta['packagename'] = dict_temp['NAME']
-                        dicta['version'] = dict_temp['VERSION']
-                        dicta['offering_version'] = dict_temp['OFFERING_VERSION']
-                        dicta['offering_id'] = dict_temp['OFFERING_ID']
+                        dicta['packageversion'] = dict_temp['VERSION']
+                        dicta['packagebuild'] = dict_temp['BUILD']
+                        dicta['packagesummary'] = dict_temp['SUMMARY']
                         if not self.version:
                             if dict_temp['default'] == 'true':
                                 dicta.update(self.getOSNode_Text(packageNode.childNodes))

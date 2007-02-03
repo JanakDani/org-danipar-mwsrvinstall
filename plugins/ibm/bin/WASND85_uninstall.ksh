@@ -12,4 +12,4 @@ if [[ $(echo ${home_dir##*/}) == $(echo ${plg_name} | tr '[:upper:]' '[:lower:]'
 fi
 
 export PYTHONPATH=${home_dir}:${PYTHONPATH}
-python2.7 ${home_dir} ${plg_name} uninstall -offeringProfile=WASND85 -configFile=${plg_dir}/samples/wasnd-default.ini "$@"
+python2.7 ${home_dir} ${plg_name} uninstall -profile=WASND85 -configFile=${plg_dir}/samples/wasnd-default.ini "$@"
