@@ -94,10 +94,11 @@ class Package():
 
     def install(self):
         # Read online and download software
-        xml = diomreader.XMLReader(url=self.config['url'], file=self.config['dm_file'],
-                                sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'],
-                                packageName=self.config['pkg_name'], version=self.version)
-        self.config.update(xml.getSWDownloadDetails())
+        #xml = diomreader.XMLReader(url=self.config['url'], file=self.config['dm_file'],
+        #                        sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'],
+        #                        packageName=self.config['pkg_name'], version=self.version)
+        #self.config.update(xml.getSWDownloadDetails())
+        #print self.config
 
         if self.config['packagename'] != Package.__pkg_nameIM and \
         not os.path.isdir(self.config['im_install_root']):
