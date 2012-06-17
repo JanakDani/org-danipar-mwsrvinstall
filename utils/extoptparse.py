@@ -1,3 +1,5 @@
+"""Extention for optparse. Taken as-is from python optparse document
+"""
 from optparse import OptionParser, Option
 
 class extOption(Option):
