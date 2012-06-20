@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-
 <dm>
     <WebSphere>
         <InstallationManager VERSION="1.5.2" OFFERING_VERSION="1.5.2000.20120223_0907" OFFERING_ID="com.ibm.cic.agent" default="true">
