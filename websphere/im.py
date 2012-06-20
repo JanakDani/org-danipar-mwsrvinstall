@@ -1,3 +1,5 @@
+"""Installation Manager Module
+"""
 import logging
 import sys
 import os
@@ -14,12 +16,16 @@ logger = logging.getLogger("websphere.im")
 
 
 class InstallationManager():
+    """Install/Remove 
+    """
     def __init__(self):
         pass
 
     @staticmethod
     def install(swdir, version, im_install_root, imdl_install_root, im_shared_root, 
                 offering_profile, offering_features, offering_id, offering_version):
+        """Installs installation manager
+        """
         logger.debug("Setting up imcl cmd")
         cmd = ( os.path.join(swdir, 'tools', 'imcl') + 
                             " install " + offering_id +
@@ -34,6 +40,8 @@ class InstallationManager():
 
     @staticmethod
     def uninstall(imdl_install_root):
+        """Uninstalls installation manager
+        """
         cmd = ( os.path.join(imdl_install_root, 'uninstall', 'uninstallc') +
                 " -silent" )
         (ret_code, output) = shell.Shell.runCmd(cmd)
@@ -82,10 +90,18 @@ class _ArgParser():
 
         
 def main(inargs):
-    logger.debug("Input arguments: %s" %(inargs))
+    """Main method does following:
+        - Parse input args
+        - Read config file
+        - Calls xml reader
+        - Calls Download Software method
+        - Unzips software file
+        - Calls Installation Manager Install/Uninstall methods
+    """
+    logger.info("Input arguments: %s" %(inargs))
     input = _ArgParser(inargs)
     (sysName, nodeName, release, version, machine) = os.uname()
-    logger.info("System Information: %s(OS), %s(HOST), %s(Release), %s(ARCH)" %(sysName, nodeName, release, machine))
+    logger.debug("System Information: %s(OS), %s(HOST), %s(Release), %s(ARCH)" %(sysName, nodeName, release, machine))
     rootConfig = _ConfigParser._getConfig(input.options.configfile, scope=['Root'])['Root']
     logger.debug("Root Config: %s" %(rootConfig))
     config = _ConfigParser._getConfig(input.options.configfile, scope=['InstallationManager'])['InstallationManager']
@@ -106,7 +122,7 @@ def main(inargs):
             logger.info("Extracting software %s. please wait" %(config['file']))
             zip = zip = zipfile.ZipFile(config['file'])
             zip.extractall(path=config['im_dl_loc'])
-            logger.info("Extracted to %s" %(config['im_dl_loc']))
+            logger.info("Software extracted to %s" %(config['im_dl_loc']))
             for dirpath,dirs,fileNames in os.walk(config['im_dl_loc']):
                 for fileName in fileNames:
                     file = os.path.join(dirpath, fileName)
