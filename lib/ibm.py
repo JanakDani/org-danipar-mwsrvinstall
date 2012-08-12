@@ -1,4 +1,4 @@
-"""Installation Manager Module
+"""IBM Middleware product installation. Supports for Installation manager, Packaging utility and other products.
 """
 import logging
 import sys
@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.DEBUG,
 logger = logging.getLogger("ibm.main")
 
 class InstallationManager():
-    """Install/Remove 
+    """Install/Remove Installation Manager.
     """
     def __init__(self):
         pass
@@ -51,6 +51,9 @@ class InstallationManager():
         (ret_code, output) = shell.Shell.runCmd(cmd)
 
 class Package():
+    """Install/rollback/uninstall Packages
+    For Packaging utility, copy or delete packages
+    """
     __oprofileIM = 'InstallationManager'
     __repoOnline = 'Online_Repo'
     __repoLocal = 'Local_Repo'
@@ -298,13 +301,7 @@ def unzip(file, target_loc):
         logger.debug("Software %s already found. Skipping unzip ...", file)
         
 def main(input):
-    """Main method does following:
-        - Parse input args
-        - Read config file
-        - Calls xml reader
-        - Calls Download Software method
-        - Unzips software file
-        - Calls Installation Manager Install/Uninstall methods
+    """Main method:
     """
     logger.info("Input arguments: %s", input)
     #input = _ArgParser(inargs[1:])
