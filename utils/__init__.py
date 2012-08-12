@@ -1,1 +1,1 @@
-__all__ = [ "extoptparse", "urlutils", "shell" ]
+__all__ = [ "extoptparse", "urlutils", "shell", "cmdlineparser", "propsparser" ]

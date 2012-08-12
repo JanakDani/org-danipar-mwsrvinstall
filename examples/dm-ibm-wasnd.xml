@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<diom>
+    <Vendor NAME="IBM">
+        <Package NAME="IBM WebSphere Application Server Network Deployment" VERSION="8.0.0.0" OFFERING_VERSION="8.0.0.20110503_0200" OFFERING_ID="com.ibm.websphere.ND.v80" default="true">
+            <OS TYPE="Multiplatform" BIT="">
+                <FILENAME>com.ibm.websphere.ND.v80.zip</FILENAME>
+                <LOCATION>softwares/ibm/was</LOCATION>
+            </OS>
+        </Package>
+        <Package NAME="IBM WebSphere Application Server Network Deployment" VERSION="8.0.0.1" OFFERING_VERSION="8.0.1.20110829_1838" OFFERING_ID="com.ibm.websphere.ND.v80" default="true">
+            <OS TYPE="Multiplatform" BIT="">
+                <FILENAME>8.0.0-WS-WAS-FP0000001.zip</FILENAME>
+                <LOCATION>softwares/ibm/was</LOCATION>
+            </OS>
+        </Package>
+        <Package NAME="IBM WebSphere Application Server Network Deployment" VERSION="8.0.0.3" OFFERING_VERSION="8.0.3.20120320_0536" OFFERING_ID="com.ibm.websphere.ND.v80" default="true">
+            <OS TYPE="Multiplatform" BIT="">
+                <FILENAME>8.0.0-WS-WAS-FP0000003.zip</FILENAME>
+                <LOCATION>softwares/ibm/was</LOCATION>
+            </OS>
+        </Package>
+    </Vendor>
+</diom>

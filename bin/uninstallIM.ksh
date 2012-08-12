@@ -1,11 +1,11 @@
 #!/usr/bin/env ksh
 
 curr_dir=$(cd $(dirname $0); pwd)
+home_dir=${curr_dir%/*}
 root_dir=${curr_dir%/*/*}
-cd ${root_dir}
+#cd ${root_dir}
 
-if [ $# == 0 ]; then
-    python3 -m mwsrvinstall.websphere.im --scope=im --action=remove --config=/root/bin/mwsrvinstall/examples/websphere-default.ini
-else
-    python3 -m mwsrvinstall.websphere.im --scope=im --action=remove "$@"
-fi
+export PYTHONPATH=${home_dir}:${PYTHONPATH}
+#python3 -m mwsrvinstall.ibm.main uninstall -offeringProfile=InstallationManager -configFile=/root/bin/mwsrvinstall/examples/im-default.ini
+
+${home_dir}/__main__.py IBM uninstall -offeringProfile=InstallationManager -configFile=/root/bin/mwsrvinstall/examples/im-default.ini "$@"
