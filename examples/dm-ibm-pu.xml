@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<diom>
+    <Vendor NAME="IBM">
+        <Package NAME="IBM Packaging Utility" VERSION="1.5.2" OFFERING_VERSION="1.5.2000.20120303_1844" OFFERING_ID="com.ibm.cic.packagingUtility" default="true">
+            <OS TYPE="Linux" BIT="x86_32">
+                <FILENAME>pu.offering.disk.linux_1.5.2000.20120303_1844.zip</FILENAME>
+                <LOCATION>softwares/ibm/pu</LOCATION>
+            </OS>
+            <OS TYPE="Linux" BIT="x86_64">
+                <FILENAME>pu.offering.disk.linux_1.5.2000.20120303_1844.zip</FILENAME>
+                <LOCATION>softwares/ibm/pu</LOCATION>
+            </OS>
+        </Package>
+    </Vendor>
+</diom>

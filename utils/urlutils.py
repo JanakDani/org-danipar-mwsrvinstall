@@ -1,6 +1,8 @@
 import logging
 import sys
 import os
+import zipfile
+import stat
 import urllib.request
 from xml.dom.minidom import parse, parseString
 
@@ -10,32 +12,37 @@ logging.basicConfig(level=logging.DEBUG,
 logger = logging.getLogger("utils.urlutils")
 
 class XMLReader():
-    def __init__(self, url, file, sysName,vendorName, productName, version=None):
+    def __init__(self,url,file,sysName,sysBit,vendorName,packageName,version=None):
         self.sysName  = sysName
+        self.sysBit  = sysBit
         self.url = url
         self.file = file
         self.vendorName = vendorName
-        self.productName = productName
+        self.packageName = packageName
         self.version = version
         try:
             httpfile = urllib.request.urlopen(os.path.join(url, file))
             self.data = httpfile.read()
             httpfile.close()
         except (urllib.error.HTTPError):
-            logger.exception("Problems while getting file %(s)" %(file))
+            logger.exception("Problems while getting file %s", file)
 
     def getOSNode_Text(self, node):
         dicta = {}
         for osNode in node:
             if osNode.nodeName == 'OS':
-                if osNode.getAttribute('TYPE') == self.sysName:
+                if osNode.getAttribute('TYPE') == self.sysName and \
+                osNode.getAttribute('BIT') == self.sysBit:
                     fileName = XMLReader._getTextData(osNode.getElementsByTagName('FILENAME')[0].childNodes)
                     location = XMLReader._getTextData(osNode.getElementsByTagName('LOCATION')[0].childNodes)
                     dicta['fileName'] = fileName
                     dicta['url'] = os.path.join(self.url, location, fileName)
-                    #dicta['version'] = dict_temp['VERSION']
-                    #dicta['offering_version'] = dict_temp['OFFERING_VERSION']
-                    #dicta['offering_id'] = dict_temp['OFFERING_ID']
+                elif osNode.getAttribute('TYPE') == 'Multiplatform':
+                    fileName = XMLReader._getTextData(osNode.getElementsByTagName('FILENAME')[0].childNodes)
+                    location = XMLReader._getTextData(osNode.getElementsByTagName('LOCATION')[0].childNodes)
+                    dicta['fileName'] = fileName
+                    dicta['url'] = os.path.join(self.url, location, fileName)
+
         return dicta
 
 
@@ -43,20 +50,25 @@ class XMLReader():
         swDownloadURL = ""
         dicta = {}
         dom = parseString(self.data)
-        dm = dom.getElementsByTagName('dm')[0]
+        dm = dom.getElementsByTagName('diom')[0]
         for vendorNode in dm.childNodes:
-            if vendorNode.nodeName == self.vendorName:
-                for productNode in vendorNode.childNodes:
-                    if productNode.nodeName == self.productName:
-                        dict_temp = dict(productNode.attributes.items())
+            if vendorNode.nodeName == 'Vendor' and \
+            dict(vendorNode.attributes.items())['NAME'] == self.vendorName:
+                for packageNode in vendorNode.childNodes:
+                    if packageNode.nodeName == 'Package' and \
+                    dict(packageNode.attributes.items())['NAME'] == self.packageName:
+                        dict_temp = dict(packageNode.attributes.items())
+                        dicta['packagename'] = dict_temp['NAME']
                         dicta['version'] = dict_temp['VERSION']
                         dicta['offering_version'] = dict_temp['OFFERING_VERSION']
                         dicta['offering_id'] = dict_temp['OFFERING_ID']
                         if not self.version:
                             if dict_temp['default'] == 'true':
-                                dicta.update(self.getOSNode_Text(productNode.childNodes))
+                                dicta.update(self.getOSNode_Text(packageNode.childNodes))
+                                return dicta
                         elif dict_temp['VERSION'] == self.version:
-                            dicta.update(self.getOSNode_Text(productNode.childNodes))
+                            dicta.update(self.getOSNode_Text(packageNode.childNodes))
+                            return dicta
         return dicta
 
     @staticmethod
@@ -67,8 +79,34 @@ class XMLReader():
 
 
 class Download():
-    def __init__(self):
-        pass
+    def __init__(self, url, fileName, target_loc):
+        if fileName:
+            file = os.path.join(target_loc, fileName)
+            if not os.path.isfile(file):
+                Download.software(url, target_loc)
+            Download.unzip(file, target_loc)
+            Download.setPermissions(target_loc)
+        else:
+            logger.exception("fileName not found in configuration")
+
+    @staticmethod
+    def setPermissions(target_loc):
+        logger.info("Setting up permissions on %s", target_loc)
+        for dirpath,dirs,fileNames in os.walk(target_loc):
+            for fileName in fileNames:
+                file = os.path.join(dirpath, fileName)
+                os.chmod(file, stat.S_IRWXU)
+
+    @staticmethod
+    def unzip(file, target_loc):
+        if not os.path.isdir(file.rstrip('.zip')):
+            if zipfile.is_zipfile(file):
+                logger.info("Extracting software %s. please wait...", file)
+                zip = zipfile.ZipFile(file)
+                zip.extractall(path=target_loc)
+                logger.info("Software extracted to %s", target_loc)
+        else:
+            logger.debug("Software %s already found. Skipping unzip ...", file)
 
     @staticmethod
     def software(url, dl_loc):
@@ -97,7 +135,7 @@ class Download():
                     sys.stdout.write("\r%2d%% - [%d,%s]" %(percent, dlSize, fileName))
             fo.close()
             sys.stdout.write("\n")
-            logger.info("%s - successfully downloaded" %(os.path.join(dl_loc,fileName)))
+            logger.info("%s - successfully downloaded", os.path.join(dl_loc,fileName))
         except (urllib.request.URLError):
             try:
                 fo.close()
