@@ -8,4 +8,4 @@ root_dir=${curr_dir%/*/*}
 export PYTHONPATH=${home_dir}:${PYTHONPATH}
 #python3 -m mwsrvinstall.ibm.main install -offeringProfile="InstallationManager" -configFile=/root/bin/mwsrvinstall/examples/im-default.ini "$@"
 
-${home_dir}/__main__.py IBM install -offeringProfile=InstallationManager -configFile=/root/bin/mwsrvinstall/examples/im-default.ini "$@"
+${home_dir}/__main__.py IBM install -offeringProfile=InstallationManager -configFile=../examples/im-default.ini "$@"

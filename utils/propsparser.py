@@ -1,5 +1,6 @@
 import logging
-import configparser
+import ConfigParser as configparser
+#import configparser #Use this for python3
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
@@ -14,7 +15,7 @@ def ini(file, scope=['ALL']):
         scope = config.sections()
     except:
         pass
-        
+
     dicta = {}
     for eachscope in scope:
         try:
@@ -24,7 +25,7 @@ def ini(file, scope=['ALL']):
             logger.exception("Scope %s not found in %s", eachscope, file)
         except:
             logger.exception("Unknown Error has occured")
-        
+
     logger.debug("Loaded %s config: %s", scope, dicta)
     return dicta
 

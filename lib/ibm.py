@@ -20,7 +20,7 @@ class InstallationManager():
         pass
 
     @staticmethod
-    def install(exec, im_install_root, imdl_install_root, imshared_root, repository, 
+    def install(exec_script, im_install_root, imdl_install_root, imshared_root, repository,
                 offering_id, offering_version=None, offering_features=None):
         """Installs installation manager
         """
@@ -32,15 +32,15 @@ class InstallationManager():
         if offering_features != None:
             offering_str += ',' + offering_features
 
-        cmd =   ( exec + 
+        cmd =   ( exec_script +
                 " install " + offering_id +
-                " -repositories " + repository + 
-                " -installationDirectory " + os.path.join(im_install_root, 'eclipse') + 
-                " -dataLocation " + imdl_install_root + 
-                " -sharedResourcesDirectory " + imshared_root + 
-                " -acceptLicense" 
+                " -repositories " + repository +
+                " -installationDirectory " + os.path.join(im_install_root, 'eclipse') +
+                " -dataLocation " + imdl_install_root +
+                " -sharedResourcesDirectory " + imshared_root +
+                " -acceptLicense"
                 )
-        (ret_code, output) = shell.Shell.runCmd(cmd) 
+        (ret_code, output) = shell.Shell.runCmd(cmd)
 
     @staticmethod
     def uninstall(imdl_install_root):
@@ -76,7 +76,7 @@ class Package():
 
         ## Load IM if Package is not IM
         if self.config['packagename'] != Package.__packageNameIM:
-            self.config.update(propsparser.ini(self.configFile, 
+            self.config.update(propsparser.ini(self.configFile,
                                 scope=[Package.__oprofileIM])[Package.__oprofileIM])
             self.config.update(propsparser.ini(self.configFile, scope=[self.oprofile])[self.oprofile])
         self.config['offering_profile'] = self.oprofile
@@ -85,17 +85,18 @@ class Package():
         ## Load local repo if package is IM or PU
         if self.config['packagename'] == Package.__packageNameIM or \
         self.config['packagename'] == Package.__packageNamePU:
-                self.config.update(propsparser.ini(self.configFile, 
+                self.config.update(propsparser.ini(self.configFile,
                                     scope=[Package.__repoLocal])[Package.__repoLocal])
         else:
-            self.config.update(propsparser.ini(self.configFile, 
+            self.config.update(propsparser.ini(self.configFile,
                                 scope=[self.config['repo_option']])[self.config['repo_option']])
 
     def install(self):
         # Read online and download software
-        xml = urlutils.XMLReader(url=self.config['url'], file=self.config['dm_file'], 
-                                sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'], 
+        xml = urlutils.XMLReader(url=self.config['url'], file=self.config['dm_file'],
+                                sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'],
                                 packageName=self.config['packagename'], version=self.version)
+        print self.config
         self.config.update(xml.getSWDownloadDetails())
 
         if self.config['packagename'] != Package.__packageNameIM and \
@@ -106,14 +107,14 @@ class Package():
             urlutils.Download(self.config['url'], self.config['fileName'], self.config['target_loc'])
 
         if self.config['packagename'] == Package.__packageNameIM:
-            InstallationManager.install(os.path.join(self.config['target_loc'], 'tools', 'imcl'), 
-                        self.config['im_install_root'], self.config['imdl_install_root'], 
+            InstallationManager.install(os.path.join(self.config['target_loc'], 'tools', 'imcl'),
+                        self.config['im_install_root'], self.config['imdl_install_root'],
                         self.config['imshared_root'], self.config['target_loc'],
                         self.config['offering_id'], self.config['offering_version']
                         )
         elif self.config['packagename'] == Package.__packageNamePU:
             Package.imcl_install(self.config['imcl'], self.config['install_root'], self.config['imshared_root'],
-                        os.path.join(self.config['target_loc'], self.config['fileName'].rstrip('.zip')), 
+                        os.path.join(self.config['target_loc'], self.config['fileName'].rstrip('.zip')),
                         self.config['offering_id'], self.config['offering_version']
                         )
         else:
@@ -143,7 +144,7 @@ class Package():
                 if installed_loc == self.config['install_root']:
                     self.config['offering_id'], self.config['offering_version'] = packageid_ver.split('_',1)
 
-            Package.imcl_uninstall(self.config['imcl'], self.config['install_root'], 
+            Package.imcl_uninstall(self.config['imcl'], self.config['install_root'],
                     self.config['offering_id'], self.config['offering_version']
                     )
 
@@ -151,8 +152,8 @@ class Package():
         ##Get offering version to rollback to
         if self.version != None:
             if self.config['repo_option'] == Package.__repoLocal:
-                xml = urlutils.XMLReader(url=self.config['url'], file=self.config['dm_file'], 
-                                sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'], 
+                xml = urlutils.XMLReader(url=self.config['url'], file=self.config['dm_file'],
+                                sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'],
                                 packageName=self.config['packagename'], version=self.version)
                 self.config.update(xml.getSWDownloadDetails())
             elif self.config['repo_option'] == Package.__repoOnline:
@@ -174,13 +175,13 @@ class Package():
                     self.config['offering_id'] = packageid_ver.split('_',1)[0]
                     self.config['offering_version'] = None
 
-        Package.imcl_rollback(self.config['imcl'], self.config['install_root'], 
+        Package.imcl_rollback(self.config['imcl'], self.config['install_root'],
                 self.config['offering_id'], self.config['offering_version']
                 )
 
     def copy_package(self, packageName):
-        xml = urlutils.XMLReader(url=self.config['url'], file=self.config['dm_file'], 
-                                sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'], 
+        xml = urlutils.XMLReader(url=self.config['url'], file=self.config['dm_file'],
+                                sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'],
                                 packageName=packageName, version=self.version)
         self.config.update(xml.getSWDownloadDetails())
         urlutils.Download(self.config['url'], self.config['fileName'], self.config['target_loc'])
@@ -211,7 +212,7 @@ class Package():
         return output
 
     @staticmethod
-    def imcl_install(exec, install_root, imshared_root, repository,
+    def imcl_install(exec_script, install_root, imshared_root, repository,
                 offering_id, offering_version=None, offering_features=None):
         logger.debug("Setting up cmd")
         offering_str = offering_id
@@ -219,17 +220,17 @@ class Package():
             offering_str += '_' + offering_version
         if offering_features != None:
             offering_str += ',' + offering_features
-        cmd =   ( exec + 
+        cmd =   ( exec_script +
                 " install " + offering_str +
                 " -repositories " + repository +
                 " -installationDirectory " + install_root +
                 " -sharedResourcesDirectory " + imshared_root +
                 " -acceptLicense"
                 )
-        (ret_code, output) = shell.Shell.runCmd(cmd) 
+        (ret_code, output) = shell.Shell.runCmd(cmd)
 
     @staticmethod
-    def imcl_rollback(exec, install_root,
+    def imcl_rollback(exec_script, install_root,
                 offering_id, offering_version=None, offering_features=None):
         logger.debug("Setting up cmd")
         offering_str = offering_id
@@ -237,36 +238,36 @@ class Package():
             offering_str += '_' + offering_version
         if offering_features != None:
             offering_str += ',' + offering_features
-        cmd =   ( exec + 
+        cmd =   ( exec_script +
                 " rollback " + offering_str +
                 #" -repositories " + repository +
                 " -installationDirectory " + install_root +
                 #" -sharedResourcesDirectory " + imshared_root +
                 " -acceptLicense"
                 )
-        (ret_code, output) = shell.Shell.runCmd(cmd) 
+        (ret_code, output) = shell.Shell.runCmd(cmd)
 
     @staticmethod
-    def imcl_uninstall(exec, install_root, offering_id, offering_version=None, offering_features=None):
+    def imcl_uninstall(exec_script, install_root, offering_id, offering_version=None, offering_features=None):
         offering_str = offering_id
         if offering_version != None:
             offering_str += '_' + offering_version
         if offering_features != None:
             offering_str += ',' + offering_features
-        cmd =   (exec +
+        cmd =   (exec_script +
                 " uninstall " + offering_str +
                 " -installationDirectory " + install_root
                 )
         (ret_code, output) = shell.Shell.runCmd(cmd)
 
     @staticmethod
-    def pucl_copy(exec, command, repository, target, offering_id=None, offering_version=None):
+    def pucl_copy(exec_script, command, repository, target, offering_id=None, offering_version=None):
         offering_str = ""
         if offering_id != None:
             offering_str = offering_id
             if offering_version != None:
                 offering_str += '_' + offering_version
-        cmd =   (exec + 
+        cmd =   (exec_script +
                 " " + command + " " + offering_str +
                 " -repositories " + repository +
                 " -target " + target +
@@ -275,11 +276,11 @@ class Package():
         (ret_code, output) = shell.Shell.runCmd(cmd)
 
     @staticmethod
-    def pucl_delete(exec, command, target, offering_id, offering_version=None):
+    def pucl_delete(exec_script, command, target, offering_id, offering_version=None):
         offering_str = offering_id
         if offering_version != None:
             offering_str += '_' + offering_version
-        cmd =   (exec +
+        cmd =   (exec_script +
                 " " + command + " " + offering_str +
                 " -target " + target
                 )
@@ -299,7 +300,7 @@ def unzip(file, target_loc):
                     os.chmod(file, stat.S_IRWXU)
     else:
         logger.debug("Software %s already found. Skipping unzip ...", file)
-        
+
 def main(input):
     """Main method:
     """
