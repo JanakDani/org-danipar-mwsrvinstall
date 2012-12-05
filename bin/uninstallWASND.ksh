@@ -8,4 +8,4 @@ root_dir=${curr_dir%/*/*}
 export PYTHONPATH=${home_dir}:${PYTHONPATH}
 #python3 -m mwsrvinstall.ibm.main uninstall -offeringProfile=WASND80 -configFile=/root/bin/mwsrvinstall/examples/wasnd-default.ini "$@"
 
-${home_dir}/__main__.py IBM uninstall -offeringProfile=WASND80 -configFile=/root/bin/mwsrvinstall/examples/wasnd-default.ini "$@"
+${home_dir}/__main__.py IBM uninstall -offeringProfile=WASND80 -configFile=../examples/wasnd-default.ini "$@"
