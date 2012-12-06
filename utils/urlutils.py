@@ -33,6 +33,22 @@ class XMLReader():
         dicta = {}
         for osNode in node:
             if osNode.nodeName == 'OS':
+                system_arr = osNode.getAttribute('SYSTEM').split(',')
+                #matchFound = False
+                for system in system_arr:
+                    if system == ''.join(self.sysName+':'+self.sysBit):
+                        fileName = XMLReader._getTextData(osNode.getElementsByTagName('FILENAME')[0].childNodes)
+                        location = XMLReader._getTextData(osNode.getElementsByTagName('LOCATION')[0].childNodes)
+                        dicta['fileName'] = fileName
+                        dicta['url'] = os.path.join(self.url, location, fileName)
+                        #matchFound = True
+                        break
+                #if matchFound:
+                    #fileName = XMLReader._getTextData(osNode.getElementsByTagName('FILENAME')[0].childNodes)
+                    #location = XMLReader._getTextData(osNode.getElementsByTagName('LOCATION')[0].childNodes)
+                    #dicta['fileName'] = fileName
+                    #dicta['url'] = os.path.join(self.url, location, fileName)
+                """
                 if osNode.getAttribute('TYPE') == self.sysName and \
                 osNode.getAttribute('BIT') == self.sysBit:
                     fileName = XMLReader._getTextData(osNode.getElementsByTagName('FILENAME')[0].childNodes)
@@ -44,6 +60,7 @@ class XMLReader():
                     location = XMLReader._getTextData(osNode.getElementsByTagName('LOCATION')[0].childNodes)
                     dicta['fileName'] = fileName
                     dicta['url'] = os.path.join(self.url, location, fileName)
+                """
 
         return dicta
 
