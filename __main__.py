@@ -2,3 +2,4 @@
 
 import sys
 from lib import *
+from plugins import *
