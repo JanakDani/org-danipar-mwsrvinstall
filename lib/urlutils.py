@@ -3,7 +3,8 @@ import sys
 import os
 import zipfile
 import stat
-import urllib.request
+import urllib2 ##remove this for python3
+##import urllib.request use this for python3
 from xml.dom.minidom import parse, parseString
 
 logging.basicConfig(level=logging.DEBUG,
@@ -21,16 +22,33 @@ class XMLReader():
         self.packageName = packageName
         self.version = version
         try:
-            httpfile = urllib.request.urlopen(os.path.join(url, file))
+            httpfile = urllib2.urlopen(os.path.join(url, file))
             self.data = httpfile.read()
             httpfile.close()
-        except (urllib.error.HTTPError):
+        #except (urllib.error.HTTPError): python3
+        except (urllib2.URLError):
             logger.exception("Problems while getting file %s", file)
 
     def getOSNode_Text(self, node):
         dicta = {}
         for osNode in node:
             if osNode.nodeName == 'OS':
+                system_arr = osNode.getAttribute('SYSTEM').split(',')
+                #matchFound = False
+                for system in system_arr:
+                    if system == ''.join(self.sysName+':'+self.sysBit):
+                        fileName = XMLReader._getTextData(osNode.getElementsByTagName('FILENAME')[0].childNodes)
+                        location = XMLReader._getTextData(osNode.getElementsByTagName('LOCATION')[0].childNodes)
+                        dicta['fileName'] = fileName
+                        dicta['url'] = os.path.join(self.url, location, fileName)
+                        #matchFound = True
+                        break
+                #if matchFound:
+                    #fileName = XMLReader._getTextData(osNode.getElementsByTagName('FILENAME')[0].childNodes)
+                    #location = XMLReader._getTextData(osNode.getElementsByTagName('LOCATION')[0].childNodes)
+                    #dicta['fileName'] = fileName
+                    #dicta['url'] = os.path.join(self.url, location, fileName)
+                """
                 if osNode.getAttribute('TYPE') == self.sysName and \
                 osNode.getAttribute('BIT') == self.sysBit:
                     fileName = XMLReader._getTextData(osNode.getElementsByTagName('FILENAME')[0].childNodes)
@@ -42,6 +60,7 @@ class XMLReader():
                     location = XMLReader._getTextData(osNode.getElementsByTagName('LOCATION')[0].childNodes)
                     dicta['fileName'] = fileName
                     dicta['url'] = os.path.join(self.url, location, fileName)
+                """
 
         return dicta
 
@@ -113,7 +132,7 @@ class Download():
         try:
             fileName = url.split('/')[-1]
             data = None
-            handle = urllib.request.urlopen(url)
+            handle = urllib2.urlopen(url)
             if not os.path.isdir(dl_loc):
                 os.mkdir(dl_loc)
             fo = open(os.path.join(dl_loc, fileName), "wb")
@@ -136,9 +155,9 @@ class Download():
             fo.close()
             sys.stdout.write("\n")
             logger.info("%s - successfully downloaded", os.path.join(dl_loc,fileName))
-        except (urllib.request.URLError):
+        except (urllib2.URLError):
             try:
                 fo.close()
             except:
                 pass
-            logger.exception("Download failed")  
+            logger.exception("Download failed")
