@@ -6,12 +6,12 @@ import os
 import stat
 #import configparser
 import zipfile
-from utils import *
+from lib import *
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt="")
-logger = logging.getLogger("ibm.main")
+logger = logging.getLogger("ibm.ibm")
 
 class InstallationManager():
     """Install/Remove Installation Manager.
@@ -300,27 +300,3 @@ def unzip(file, target_loc):
                     os.chmod(file, stat.S_IRWXU)
     else:
         logger.debug("Software %s already found. Skipping unzip ...", file)
-
-def main(input):
-    """Main method:
-    """
-    logger.info("Input arguments: %s", input)
-    #input = _ArgParser(inargs[1:])
-
-    for oprofile in input.offeringProfile:
-        packageObj = Package(input.vendorname, oprofile, input.configFile.name, input.version)
-        if input.command == 'install':
-            packageObj.install()
-        elif input.command == 'rollback':
-            packageObj.rollback()
-        elif input.command == 'uninstall':
-            packageObj.uninstall()
-        elif input.command == 'copy-package':
-            packageObj.copy_package(input.packageName)
-        elif input.command == 'delete-package':
-            packageObj.delete_package(input.packageName)
-
-if __name__ == '__main__':
-    inputArgs = cmdlineparser.ArgParser(sys.argv[1:])
-    if inputArgs.options.vendorname == 'IBM':
-        main(inputArgs.options)
