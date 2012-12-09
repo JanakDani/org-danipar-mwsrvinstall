@@ -5,7 +5,7 @@ import subprocess
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt="")
-logger = logging.getLogger("utils.shell")
+logger = logging.getLogger("swinstall.shell")
 
 
 class Shell():
@@ -15,7 +15,7 @@ class Shell():
     @staticmethod
     def runCmd(cmd):
         logger.info("Executing command: \n%s", cmd)
-        proc = subprocess.Popen(cmd, shell=True, 
+        proc = subprocess.Popen(cmd, shell=True,
                                 stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         output = ''
         logger.info("Output from SHELL: ")
@@ -27,7 +27,7 @@ class Shell():
         logger.info("SHELL output completed")
         if ret_code == 0:
             logger.info("Return code from SHELL is: %s", ret_code)
-        else:            
+        else:
             logger.error("Error from the shell: \n%s", output)
             logger.error("Return code from SHELL is: %s", ret_code)
             raise Exception(cmd, ret_code, output)
