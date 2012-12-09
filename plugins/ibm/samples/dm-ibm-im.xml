@@ -11,7 +11,7 @@
                 <LOCATION>../im/solaris/x86</LOCATION>
             </OS>
         </Package>
-        <Package NAME="IBM Installation Manager" VERSION="1.5.3" OFFERING_VERSION="1.5.3000.20120531_1954" OFFERING_ID="com.ibm.cic.agent" default="true">
+        <Package NAME="IBM Installation Manager" VERSION="1.5.3" OFFERING_VERSION="1.5.3000.20120531_1954" OFFERING_ID="com.ibm.cic.agent" default="false">
             <OS SYSTEM="Linux:x86_32,Linux:x86_64">
                 <FILENAME>agent.installer.linux.gtk.x86_1.5.3000.20120531_1954.zip</FILENAME>
                 <LOCATION>../im/linux/x86_32</LOCATION>
@@ -21,7 +21,7 @@
                 <LOCATION>../im/solaris/x86</LOCATION>
             </OS>
         </Package>
-        <Package NAME="IBM Installation Manager" VERSION="1.5.2" OFFERING_VERSION="1.5.2000.20120223_0907" OFFERING_ID="com.ibm.cic.agent" default="true">
+        <Package NAME="IBM Installation Manager" VERSION="1.5.2" OFFERING_VERSION="1.5.2000.20120223_0907" OFFERING_ID="com.ibm.cic.agent" default="false">
             <OS SYSTEM="Linux:x86_32,Linux:x86_64">
                 <FILENAME>agent.installer.linux.gtk.x86_1.5.2000.20120223_0907.zip</FILENAME>
                 <LOCATION>../im/linux/x86_32</LOCATION>
