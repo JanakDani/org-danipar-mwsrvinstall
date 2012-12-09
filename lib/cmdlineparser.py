@@ -6,7 +6,7 @@ class ArgParser():
             Current vendors supported are IBM. It includes installation, \
             un-installation, rollback, list softwares and for other purposes')
         main_subparsers = main_parser.add_subparsers(help='vendors', dest='vendorname')
-                
+
         ####### IBM
         ibm_parser = main_subparsers.add_parser('IBM', help='IBM Middleware Software')
         ibm_subparsers = ibm_parser.add_subparsers(help='commands', dest='command')
