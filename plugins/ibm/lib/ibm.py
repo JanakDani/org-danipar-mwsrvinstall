@@ -96,7 +96,7 @@ class Package():
         xml = urlutils.XMLReader(url=self.config['url'], file=self.config['dm_file'],
                                 sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'],
                                 packageName=self.config['packagename'], version=self.version)
-        print self.config
+        #print self.config
         self.config.update(xml.getSWDownloadDetails())
 
         if self.config['packagename'] != Package.__packageNameIM and \
@@ -107,10 +107,16 @@ class Package():
             urlutils.Download(self.config['url'], self.config['fileName'], self.config['target_loc'])
 
         if self.config['packagename'] == Package.__packageNameIM:
-            InstallationManager.install(os.path.join(self.config['target_loc'], 'tools', 'imcl'),
-                        self.config['im_install_root'], self.config['imdl_install_root'],
-                        self.config['imshared_root'], self.config['target_loc'],
-                        self.config['offering_id'], self.config['offering_version']
+            InstallationManager.install(os.path.join(self.config['target_loc'],
+                                                     self.config['fileName'].rstrip('.zip'),
+                                                     'tools', 'imcl'),
+                                        self.config['im_install_root'],
+                                        self.config['imdl_install_root'],
+                                        self.config['imshared_root'],
+                                        os.path.join(self.config['target_loc'],
+                                                                   self.config['fileName'].rstrip('.zip')),
+                                        self.config['offering_id'],
+                                        self.config['offering_version']
                         )
         elif self.config['packagename'] == Package.__packageNamePU:
             Package.imcl_install(self.config['imcl'], self.config['install_root'], self.config['imshared_root'],

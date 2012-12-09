@@ -1,2 +1,2 @@
-*   [31mf5b2d44[m -[33m (HEAD, release-1.1.2, develop)[m 
-|\   [32m(Fri Dec 7 06:15:21 2012 -0500)[m 
+* ad3312e - (HEAD, release-1.1.3, develop) 
+|  (Sat Dec 8 23:30:21 2012 -0500) 
