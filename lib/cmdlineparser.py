@@ -1,14 +1,16 @@
 import argparse
 
+
 class ArgParser():
     def __init__(self, sysargv):
-        main_parser = argparse.ArgumentParser(description='Use this package for middleware server build. \
-            Current vendors supported are IBM. It includes installation, \
+        main_parser = argparse.ArgumentParser(description='Use this package for software installation. \
+            Current vendors supported are IBM and custom scripts. It includes installation, \
             un-installation, rollback, list softwares and for other purposes')
         main_subparsers = main_parser.add_subparsers(help='vendors', dest='vendorname')
 
-        ####### IBM
-        ibm_parser = main_subparsers.add_parser('IBM', help='IBM Middleware Software')
+        ##############################################################
+        ##### IBM
+        ibm_parser = main_subparsers.add_parser('IBM', help='IBM Software')
         ibm_subparsers = ibm_parser.add_subparsers(help='commands', dest='command')
 
         ibm_install_parser = ibm_subparsers.add_parser('install', help='Install Software')
@@ -50,6 +52,26 @@ class ArgParser():
         ibm_deletepackage_parser.add_argument('-version', required=True, help='Version')
         ibm_deletepackage_parser.add_argument('-packageName', required=True, help='Provide Package Name')
 
-        #### IBM completed
+        ##### IBM completed
+        ##############################################################
+
+        ##############################################################
+        ##### SCRIPT
+        script_parser = main_subparsers.add_parser('SCRIPT', help='Scripts bundle')
+        script_subparsers = script_parser.add_subparsers(help='commands', dest='command')
+
+        script_install_parser = script_subparsers.add_parser('install', help='Install script bundle')
+        script_install_parser.add_argument('-offeringProfile', action='store', required=True, nargs='+', help='Offering profile name')
+        script_install_parser.add_argument('-configFile', type=argparse.FileType('r'), required=True, help='Property file')
+        script_install_parser.add_argument('-version', required=True, help='Version')
+
+        # A uninstall command
+        script_uninstall_parser = script_subparsers.add_parser('uninstall', help='Uninstall script bundle')
+        script_uninstall_parser.add_argument('-offeringProfile', action='store', required=True, nargs='+', help='Offering profile name')
+        script_uninstall_parser.add_argument('-configFile', type=argparse.FileType('r'), required=True, help='Property file')
+        script_uninstall_parser.add_argument('-version', required=False, help='Version')
+
+        ##### SCRIPT completed
+        ##############################################################
 
         self.options = main_parser.parse_args(sysargv)
