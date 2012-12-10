@@ -1,92 +1,163 @@
-* commit ad3312ebe8c9154b3e7ba576c1ffe651f639f799
-| Author: Janak Dani <Janak.Dani@danipar.com>
-| Date:   Sat Dec 8 23:30:21 2012 -0500
-| 
-|     Remove README file. New file will be changelog
-|  
-* commit 4c8fc922ddc426b5412df2b9ffa73530a341a650
-| Author: Janak Dani <Janak.Dani@danipar.com>
-| Date:   Sat Dec 8 23:27:52 2012 -0500
-| 
-|     Modified diom structure and added separate diom directory on server. Also, re-zip imcl binaries for consistency
-|    
-*   commit c3148b3796f2c66876db55d6cf956d81d067f89a
-|\  Merge: b07acc7 038ff0a
+*   commit ae900f2cdc19ab91d61373b349011ce99d54c4f0
+|\  Merge: aa0fa1c 02ed1cb
 | | Author: Janak Dani <Janak.Dani@danipar.com>
-| | Date:   Sat Dec 8 20:53:43 2012 -0500
+| | Date:   Sun Dec 9 21:56:08 2012 -0500
 | | 
-| |     Merge branch 'rearrange' into develop
+| |     Merge branch 'release-1.1.4'
 | |   
-| * commit 038ff0a1bb913b0d8a8e875ea1f8018e8e008f92
-|/  Author: Janak Dani <Janak.Dani@danipar.com>
-|   Date:   Sat Dec 8 20:53:06 2012 -0500
-|   
-|       Move bin directory to plugin level for further isolation
-|    
-*   commit b07acc789fb1739c99c8d374ad9cfc1e2fd4b829
-|\  Merge: f5b2d44 2a04ab6
+| * commit 02ed1cb918f8ee90422edc6fbf4752c6f044da8e
 | | Author: Janak Dani <Janak.Dani@danipar.com>
-| | Date:   Fri Dec 7 07:42:47 2012 -0500
+| | Date:   Sun Dec 9 21:55:31 2012 -0500
 | | 
-| |     Merge tag 'release-1.1.2' into develop
+| |     Bumped version to 1.1.4
+| |   
+| * commit a136383b520203e828b8b7617d22b8f8b1bcf8fa
+| | Author: Janak Dani <Janak.Dani@danipar.com>
+| | Date:   Sun Dec 9 21:55:12 2012 -0500
+| | 
+| |     Bumped version to 1.1.4
 | |     
-| |     Release 1.1.2
+| *   commit b21d23bbe50a112a97a8e16d246a309f4502dad3
+| |\  Merge: f07c003 02f7027
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Sun Dec 9 21:45:25 2012 -0500
+| | | 
+| | |     Merge branch 'script_plg' into develop
+| | |    
+| | * commit 02f70274dff49a57899fbb93b8b59c92e460a60d
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
+| |   Date:   Sun Dec 9 21:44:04 2012 -0500
+| |   
+| |       Added plugin script. Check sample for basic functionality
 | |     
-| *   commit 2a04ab6c9acb560531b6ecb70237684e49adbee6
-| |\  Merge: 6bddb8c 4ad77ef
+| *   commit f07c00379b0a9408c35b103e7613942c87405eb6
+| |\  Merge: cb3f4cd 2626caa
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Sun Dec 9 15:52:43 2012 -0500
+| | | 
+| | |     Merge branch 'xmlreader' into develop
+| | |    
+| | * commit 2626caa0622a56169f21baec4badb19a7eb6ea18
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
+| |   Date:   Sun Dec 9 15:51:30 2012 -0500
+| |   
+| |       Isolated diomreader to plugin level. Independent diom and diomreader.py can now be constructed
+| |   
+| * commit cb3f4cd2afb7469a21a24a0de6a9c1230033b6a8
+| | Author: Janak Dani <Janak.Dani@danipar.com>
+| | Date:   Sun Dec 9 14:11:55 2012 -0500
+| | 
+| |     renamed shell scripts and diom files
+| |     
+| *   commit 3a89d5e33c645e6980e0f925a4c1e42dbc9fbe52
+| |\  Merge: ad3312e e8ae3a3
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Sat Dec 8 23:40:10 2012 -0500
+| | | 
+| | |     Merge branch 'release-1.1.3' into develop
+| | |      
+* | |   commit aa0fa1cf12f44966212ca961cb1dabf1aa4ca5d1
+|\ \ \  Merge: 2a04ab6 e8ae3a3
+| | |/  Author: Janak Dani <Janak.Dani@danipar.com>
+| |/|   Date:   Sat Dec 8 23:36:56 2012 -0500
+| | |   
+| | |       Merge branch 'release-1.1.3'
+| | |    
+| * | commit e8ae3a3551e8d6bafd65fa215d320470b7fd5d27
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
+| |   Date:   Sat Dec 8 23:36:17 2012 -0500
+| |   
+| |       Bumped up to version 1.1.3
+| |   
+| * commit ad3312ebe8c9154b3e7ba576c1ffe651f639f799
+| | Author: Janak Dani <Janak.Dani@danipar.com>
+| | Date:   Sat Dec 8 23:30:21 2012 -0500
+| | 
+| |     Remove README file. New file will be changelog
+| |   
+| * commit 4c8fc922ddc426b5412df2b9ffa73530a341a650
+| | Author: Janak Dani <Janak.Dani@danipar.com>
+| | Date:   Sat Dec 8 23:27:52 2012 -0500
+| | 
+| |     Modified diom structure and added separate diom directory on server. Also, re-zip imcl binaries for consistency
+| |     
+| *   commit c3148b3796f2c66876db55d6cf956d81d067f89a
+| |\  Merge: b07acc7 038ff0a
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Sat Dec 8 20:53:43 2012 -0500
+| | | 
+| | |     Merge branch 'rearrange' into develop
+| | |    
+| | * commit 038ff0a1bb913b0d8a8e875ea1f8018e8e008f92
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
+| |   Date:   Sat Dec 8 20:53:06 2012 -0500
+| |   
+| |       Move bin directory to plugin level for further isolation
+| |     
+| *   commit b07acc789fb1739c99c8d374ad9cfc1e2fd4b829
+| |\  Merge: f5b2d44 2a04ab6
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
+|/|   Date:   Fri Dec 7 07:42:47 2012 -0500
+| |   
+| |       Merge tag 'release-1.1.2' into develop
+| |       
+| |       Release 1.1.2
+| |     
+* |   commit 2a04ab6c9acb560531b6ecb70237684e49adbee6
+|\ \  Merge: 6bddb8c 4ad77ef
 | | | Author: Janak Dani <Janak.Dani@danipar.com>
 | | | Date:   Fri Dec 7 07:39:30 2012 -0500
 | | | 
 | | |     Merge branch 'release-1.1.2'
 | | |    
-| | * commit 4ad77ef299263c94500f8e45cbf3eb3f38261dac
+| * | commit 4ad77ef299263c94500f8e45cbf3eb3f38261dac
 | |/  Author: Janak Dani <Janak.Dani@danipar.com>
-|/|   Date:   Fri Dec 7 07:38:38 2012 -0500
+| |   Date:   Fri Dec 7 07:38:38 2012 -0500
 | |   
 | |       Bumped version to 1.1.2
 | |     
-* |   commit f5b2d443750eacc857725ebd78f537e18dd271ee
-|\ \  Merge: ec9d929 5322c63
+| *   commit f5b2d443750eacc857725ebd78f537e18dd271ee
+| |\  Merge: ec9d929 5322c63
 | | | Author: Janak Dani <Janak.Dani@danipar.com>
 | | | Date:   Fri Dec 7 06:15:21 2012 -0500
 | | | 
 | | |     Merge branch 'plugin_feature' into develop
 | | |    
-| * | commit 5322c6352fbef62d24877676edcdd179a293a0b9
+| | * commit 5322c6352fbef62d24877676edcdd179a293a0b9
 | | | Author: Janak Dani <Janak.Dani@danipar.com>
 | | | Date:   Fri Dec 7 06:14:45 2012 -0500
 | | | 
 | | |     Adding extra files and rearrange code
 | | |    
-| * | commit cbf1eb6d123b41aec9abe85698b0a8871b85f78d
+| | * commit cbf1eb6d123b41aec9abe85698b0a8871b85f78d
 | | | Author: Janak Dani <Janak.Dani@danipar.com>
 | | | Date:   Fri Dec 7 06:11:01 2012 -0500
 | | | 
 | | |     Modified directory structure and packaging
 | | |    
-| * | commit ac28208112c983bc9877409b4deb33aef4d7a304
-|/ /  Author: Janak Dani <Janak.Dani@danipar.com>
+| | * commit ac28208112c983bc9877409b4deb33aef4d7a304
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
 | |   Date:   Thu Dec 6 22:11:36 2012 -0500
 | |   
 | |       Removed utils dir
 | |     
-* |   commit ec9d929838bf2e2d047c3c33cb5ebd2794a0e606
-|\ \  Merge: 7aa7f29 6231b6a
+| *   commit ec9d929838bf2e2d047c3c33cb5ebd2794a0e606
+| |\  Merge: 7aa7f29 6231b6a
 | | | Author: Janak Dani <Janak.Dani@danipar.com>
 | | | Date:   Thu Dec 6 05:59:47 2012 -0500
 | | | 
 | | |     Merge branch 'OSXMLStr_change' into develop
 | | |    
-| * | commit 6231b6af168ceab7d4e80f8cac0e70fb6cc0c133
-|/ /  Author: Janak Dani <Janak.Dani@danipar.com>
+| | * commit 6231b6af168ceab7d4e80f8cac0e70fb6cc0c133
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
 | |   Date:   Thu Dec 6 05:58:15 2012 -0500
 | |   
 | |       Added SYSTEM tag to support multiple platforms
 | |     
-* |   commit 7aa7f29ea81d191e277fbdf5c08498bb089acd7c
-|\ \  Merge: 6bddb8c 1907789
-| |/  Author: Janak Dani <Janak.Dani@danipar.com>
-|/|   Date:   Wed Dec 5 07:15:15 2012 -0500
+| *   commit 7aa7f29ea81d191e277fbdf5c08498bb089acd7c
+| |\  Merge: 6bddb8c 1907789
+|/ /  Author: Janak Dani <Janak.Dani@danipar.com>
+| |   Date:   Wed Dec 5 07:15:15 2012 -0500
 | |   
 | |       Merge branch 'python2_feature' into develop
 | |   
