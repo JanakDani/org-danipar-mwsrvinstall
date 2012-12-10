@@ -7,6 +7,7 @@ import stat
 #import configparser
 import zipfile
 from lib import *
+import diomreader
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
@@ -93,7 +94,7 @@ class Package():
 
     def install(self):
         # Read online and download software
-        xml = urlutils.XMLReader(url=self.config['url'], file=self.config['dm_file'],
+        xml = diomreader.XMLReader(url=self.config['url'], file=self.config['dm_file'],
                                 sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'],
                                 packageName=self.config['packagename'], version=self.version)
         #print self.config
@@ -104,7 +105,7 @@ class Package():
             raise Exception('Installation Manager not found installed')
 
         if self.config['repo_option'] == Package.__repoLocal:
-            urlutils.Download(self.config['url'], self.config['fileName'], self.config['target_loc'])
+            download.Download(self.config['url'], self.config['fileName'], self.config['target_loc'])
 
         if self.config['packagename'] == Package.__packageNameIM:
             InstallationManager.install(os.path.join(self.config['target_loc'],
@@ -158,7 +159,7 @@ class Package():
         ##Get offering version to rollback to
         if self.version != None:
             if self.config['repo_option'] == Package.__repoLocal:
-                xml = urlutils.XMLReader(url=self.config['url'], file=self.config['dm_file'],
+                xml = diomreader.XMLReader(url=self.config['url'], file=self.config['dm_file'],
                                 sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'],
                                 packageName=self.config['packagename'], version=self.version)
                 self.config.update(xml.getSWDownloadDetails())
@@ -186,11 +187,11 @@ class Package():
                 )
 
     def copy_package(self, packageName):
-        xml = urlutils.XMLReader(url=self.config['url'], file=self.config['dm_file'],
+        xml = diomreader.XMLReader(url=self.config['url'], file=self.config['dm_file'],
                                 sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'],
                                 packageName=packageName, version=self.version)
         self.config.update(xml.getSWDownloadDetails())
-        urlutils.Download(self.config['url'], self.config['fileName'], self.config['target_loc'])
+        download.Download(self.config['url'], self.config['fileName'], self.config['target_loc'])
         Package.pucl_copy(os.path.join(self.config['install_root'], 'PUCL'), 'copy',
                     os.path.join(self.config['target_loc'],self.config['fileName'].rstrip('.zip')), self.config['pu_local_target'],
                     self.config['offering_id'], self.config['offering_version']

@@ -5,7 +5,7 @@ import ConfigParser as configparser
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt="")
-logger = logging.getLogger("utils.propsparser")
+logger = logging.getLogger("swinstall.propsparser")
 
 def ini(file, scope=['ALL']):
     config = configparser.ConfigParser()
