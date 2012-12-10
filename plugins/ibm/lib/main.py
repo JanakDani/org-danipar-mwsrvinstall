@@ -30,5 +30,4 @@ def main(input):
 
 if __name__ == '__main__':
     inputArgs = cmdlineparser.ArgParser(sys.argv[1:])
-    if inputArgs.options.vendorname == 'IBM':
-        main(inputArgs.options)
+    main(inputArgs.options)
