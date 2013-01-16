@@ -97,7 +97,7 @@ class Package():
         xml = diomreader.XMLReader(url=self.config['url'], file=self.config['dm_file'],
                                 sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'],
                                 packageName=self.config['packagename'], version=self.version)
-        #print self.config
+        print self.config
         self.config.update(xml.getSWDownloadDetails())
 
         if self.config['packagename'] != Package.__packageNameIM and \
@@ -125,15 +125,21 @@ class Package():
                         self.config['offering_id'], self.config['offering_version']
                         )
         else:
+            if not self.config.has_key('offering_properties') or self.config['offering_properties'] == "":
+                self.config['offering_properties'] = None
+            if not self.config.has_key('offering_preferences') or self.config['offering_preferences'] == "":
+                self.config['offering_preferences'] = None
             if self.config['repo_option'] == Package.__repoLocal:
                 Package.imcl_install(self.config['imcl'], self.config['install_root'], self.config['imshared_root'],
                         os.path.join(self.config['target_loc'], self.config['fileName'].rstrip('.zip')),
-                        self.config['offering_id'], self.config['offering_version'], self.config['offering_features']
+                        self.config['offering_id'], self.config['offering_version'], self.config['offering_features'],
+                        self.config['offering_properties'], self.config['offering_preferences']
                         )
             elif self.config['repo_option'] == Package.__repoOnline:
                 Package.imcl_install(self.config['imcl'], self.config['install_root'], self.config['imshared_root'],
                         os.path.join(self.config['target_loc']),
-                        self.config['offering_id'], self.config['offering_version'], self.config['offering_features']
+                        self.config['offering_id'], self.config['offering_version'], self.config['offering_features'],
+                        self.config['offering_properties'], self.config['offering_preferences']
                         )
 
     def uninstall(self):
@@ -193,7 +199,8 @@ class Package():
         self.config.update(xml.getSWDownloadDetails())
         download.Download(self.config['url'], self.config['fileName'], self.config['target_loc'])
         Package.pucl_copy(os.path.join(self.config['install_root'], 'PUCL'), 'copy',
-                    os.path.join(self.config['target_loc'],self.config['fileName'].rstrip('.zip')), self.config['pu_local_target'],
+                    os.path.join(self.config['target_loc'],self.config['fileName'].rstrip('.zip')),
+                    os.path.join(self.config['pu_local_target'],self.config['offering_id']),
                     self.config['offering_id'], self.config['offering_version']
                     )
 
@@ -205,7 +212,7 @@ class Package():
                 self.config['offering_id'], self.config['offering_version'] = packageid_ver.split('_',1)
 
         Package.pucl_delete(os.path.join(self.config['install_root'], 'PUCL'), 'delete',
-                    self.config['pu_local_target'],
+                    os.path.join(self.config['pu_local_target'],self.config['offering_id']),
                     self.config['offering_id'], self.config['offering_version']
                     )
 
@@ -220,7 +227,8 @@ class Package():
 
     @staticmethod
     def imcl_install(exec_script, install_root, imshared_root, repository,
-                offering_id, offering_version=None, offering_features=None):
+                offering_id, offering_version=None, offering_features=None,
+                offering_properties=None, offering_preferences=None):
         logger.debug("Setting up cmd")
         offering_str = offering_id
         if offering_version != None:
@@ -234,6 +242,10 @@ class Package():
                 " -sharedResourcesDirectory " + imshared_root +
                 " -acceptLicense"
                 )
+        if offering_properties != None:
+            cmd = cmd + ' -properties ' + offering_properties
+        if offering_preferences != None:
+            cmd = cmd + ' -preferences ' + offering_preferences
         (ret_code, output) = shell.Shell.runCmd(cmd)
 
     @staticmethod
