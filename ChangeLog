@@ -1,8 +1,33 @@
-* commit 3f9a8a55026b73398bc045a283e354d099a61c7c
+* commit afb8fa9e89acd8b2c296d2eb9b69bf77479372d1
 | Author: Janak Dani <Janak.Dani@danipar.com>
-| Date:   Fri Feb 2 21:16:59 2007 -0500
+| Date:   Sat Feb 3 06:52:48 2007 -0500
 | 
-|     updated verbiage for diom
+|     updated diom files
+|  
+* commit d410af7b62843b53ec7c7050ab27039daa28a4fe
+| Author: Janak Dani <Janak.Dani@danipar.com>
+| Date:   Sat Feb 3 06:51:23 2007 -0500
+| 
+|     Enabled default versioning
+|    
+*   commit f4eae1eefde46c2553de585899e34d1efdcc2736
+|\  Merge: c2f0e82 1b2c275
+| | Author: Janak Dani <Janak.Dani@danipar.com>
+| | Date:   Fri Feb 2 21:22:35 2007 -0500
+| | 
+| |     Merge branch 'feature-changediom'
+| |   
+| * commit 1b2c2753dfbcfa1e14b9b45a48d30d90cda6e69e
+| | Author: Janak Dani <Janak.Dani@danipar.com>
+| | Date:   Fri Feb 2 21:21:54 2007 -0500
+| | 
+| |     Updated to 1.1.7
+| |   
+| * commit 3f9a8a55026b73398bc045a283e354d099a61c7c
+|/  Author: Janak Dani <Janak.Dani@danipar.com>
+|   Date:   Fri Feb 2 21:16:59 2007 -0500
+|   
+|       updated verbiage for diom
 |  
 * commit c2f0e82d2520bb158bc5c436b4ef183801b9cdde
 | Author: Janak Dani <Janak.Dani@danipar.com>
