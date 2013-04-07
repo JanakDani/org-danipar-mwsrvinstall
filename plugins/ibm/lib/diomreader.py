@@ -29,6 +29,16 @@ class XMLReader():
         except (urllib2.URLError):
             logger.exception("Problems while getting file %s", file)
 
+    def getDependencyNode_Text(self, node):
+        lista = []
+        for depNode in node:
+            if depNode.nodeName == 'Dependency':
+                dicta = {}
+                dicta['packagename'] = depNode.getAttribute('NAME')
+                dicta['packageversion'] = depNode.getAttribute('VERSION')
+                lista.append(dicta)
+        return lista
+
     def getOSNode_Text(self, node):
         dicta = {}
         for osNode in node:
@@ -84,9 +94,11 @@ class XMLReader():
                         if not self.version:
                             if dict_temp['default'] == 'true':
                                 dicta.update(self.getOSNode_Text(packageNode.childNodes))
+                                dicta['dependency'] = self.getDependencyNode_Text(packageNode.childNodes)
                                 return dicta
                         elif dict_temp['VERSION'] == self.version:
                             dicta.update(self.getOSNode_Text(packageNode.childNodes))
+                            dicta['dependency'] = self.getDependencyNode_Text(packageNode.childNodes)
                             return dicta
         return dicta
 
