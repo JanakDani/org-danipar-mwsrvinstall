@@ -73,23 +73,48 @@ class Package():
         (self.sysName, nodeName, release, version, self.machine) = os.uname()
         logger.debug("System Information: %s(OS), %s(HOST), %s(Release), %s(ARCH)", self.sysName, nodeName, release, self.machine)
         self.config.update(propsparser.ini(self.configFile, scope=['Root'])['Root'])
+        ## load Root data if file found
+        if self.config.has_key('root_config_file'):
+            self.config['root_config_file'] = os.path.join(os.path.dirname(self.configFile),
+                                                           self.config['root_config_file'])
+            self.config.update(propsparser.ini(self.config['root_config_file'],
+                                               scope=['Root'])['Root'])
+            self.config.update(propsparser.ini(self.configFile, scope=['Root'])['Root'])
+            self.config['root_config_file'] = os.path.join(os.path.dirname(self.configFile),
+                                                           self.config['root_config_file'])
         self.config.update(propsparser.ini(self.configFile, scope=[self.profile])[self.profile])
-
         ## Load IM if Package is not IM
         if self.config['pkg_name'] != Package.__pkg_nameIM:
             self.config.update(propsparser.ini(self.configFile,
                                 scope=[Package.__profileIM])[Package.__profileIM])
+            ## load IM data if file found
+            if self.config.has_key('im_config_file'):
+                self.config['im_config_file'] = os.path.join(os.path.dirname(self.configFile),
+                                                             self.config['im_config_file'])
+                self.config.update(propsparser.ini(self.config['im_config_file'],
+                                                   scope=[Package.__profileIM])[Package.__profileIM])
+                self.config.update(propsparser.ini(self.configFile,
+                                scope=[Package.__profileIM])[Package.__profileIM])
+                self.config['im_config_file'] = os.path.join(os.path.dirname(self.configFile),
+                                                             self.config['im_config_file'])
             self.config.update(propsparser.ini(self.configFile, scope=[self.profile])[self.profile])
         self.config['profile'] = self.profile
         self.config['imcl'] = os.path.join(self.config['im_install_root'],'eclipse','tools','imcl')
-
-        ## Load local repo if package is IM or PU
+        ## Load local repo if package is IM or PU based on root data file
         if self.config['pkg_name'] == Package.__pkg_nameIM or \
         self.config['pkg_name'] == Package.__pkg_namePU:
+            if self.config.has_key('root_config_file'):
+                self.config.update(propsparser.ini(self.config['root_config_file'],
+                                                   scope=[Package.__repoLocal])[Package.__repoLocal])
+            else:
                 self.config.update(propsparser.ini(self.configFile,
                                     scope=[Package.__repoLocal])[Package.__repoLocal])
         else:
-            self.config.update(propsparser.ini(self.configFile,
+            if self.config.has_key('root_config_file'):
+                self.config.update(propsparser.ini(self.config['root_config_file'],
+                                                   scope=[self.config['repo_option']])[self.config['repo_option']])
+            else:
+                self.config.update(propsparser.ini(self.configFile,
                                 scope=[self.config['repo_option']])[self.config['repo_option']])
 
     def install(self):
