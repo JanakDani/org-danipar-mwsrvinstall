@@ -20,8 +20,10 @@ def main(input):
     if input.command == 'install':
         # Read online and download software
         xml = diomreader.XMLReader(url=packageObj.config['url'], file=packageObj.config['dm_file'],
-                                    sysName=packageObj.sysName,sysBit=packageObj.machine,vendorName=packageObj.config['vendorname'],
-                                    packageName=packageObj.config['pkg_name'], version=packageObj.version)
+                                   sysName=packageObj.sysName,sysBit=packageObj.machine,vendorName=packageObj.config['vendorname'],
+                                   packageName=packageObj.config['pkg_name'], version=packageObj.version,
+                                   realm=packageObj.config['url_realm'],user=packageObj.config['url_user'],
+                                   passwd=packageObj.config['url_passwd'])
         packageObj.config.update(xml.getSWDownloadDetails())
         """
         #print packageObj.config

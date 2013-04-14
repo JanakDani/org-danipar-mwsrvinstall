@@ -12,11 +12,11 @@ logging.basicConfig(level=logging.DEBUG,
 logger = logging.getLogger("swinstall.download")
 
 class Download():
-    def __init__(self, url, fileName, target_loc):
+    def __init__(self, url, fileName, target_loc, realm=None,user=None, passwd=None):
         if fileName:
             file = os.path.join(target_loc, fileName)
             if not os.path.isfile(file):
-                Download.software(url, target_loc)
+                Download.software(url, target_loc, realm=realm, user=user, passwd=passwd)
             Download.unzip(file, target_loc)
             Download.setPermissions(target_loc)
         else:
@@ -42,7 +42,18 @@ class Download():
             logger.debug("Software %s already found. Skipping unzip ...", file)
 
     @staticmethod
-    def software(url, dl_loc):
+    def software(url, dl_loc, realm=None, user=None, passwd=None):
+        ## auth
+        if user != None and passwd != None:
+            auth = urllib2.HTTPBasicAuthHandler()
+            auth.add_password(
+                            realm=realm,
+                            uri=url,
+                            user='%s'%user,
+                            passwd=passwd
+                            )
+            opener = urllib2.build_opener(auth)
+            urllib2.install_opener(opener)
         try:
             fileName = url.split('/')[-1]
             data = None
@@ -69,9 +80,15 @@ class Download():
             fo.close()
             sys.stdout.write("\n")
             logger.info("%s - successfully downloaded", os.path.join(dl_loc,fileName))
-        except (urllib2.URLError):
+        except urllib2.HTTPError, e:
+            if e.code == 401:
+                logger.exception("Authorization Failed - %s" %(e.code))
+            else:
+                logger.exception("Download failed")
+        except:
+            logger.exception("Download failed")
+        finally:
             try:
                 fo.close()
             except:
                 pass
-            logger.exception("Download failed")

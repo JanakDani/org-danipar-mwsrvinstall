@@ -13,7 +13,8 @@ logging.basicConfig(level=logging.DEBUG,
 logger = logging.getLogger("ibm.diomreader")
 
 class XMLReader():
-    def __init__(self,url,file,sysName,sysBit,vendorName,packageName,version=None):
+    def __init__(self,url,file,sysName,sysBit,vendorName,packageName,version=None,
+                 realm=None,user=None,passwd=None):
         self.sysName  = sysName
         self.sysBit  = sysBit
         self.url = url
@@ -21,13 +22,31 @@ class XMLReader():
         self.vendorName = vendorName
         self.packageName = packageName
         self.version = version
+        if user != None and passwd != None:
+            auth = urllib2.HTTPBasicAuthHandler()
+            auth.add_password(
+                                realm=realm,
+                                uri=os.path.join(url,file),
+                                user='%s'%user,
+                                passwd=passwd
+                             )
+            opener = urllib2.build_opener(auth)
+            urllib2.install_opener(opener)
         try:
             httpfile = urllib2.urlopen(os.path.join(url, file))
             self.data = httpfile.read()
-            httpfile.close()
-        #except (urllib.error.HTTPError): python3
-        except (urllib2.URLError):
+        except urllib2.HTTPError, e:
+            if e.code == 401:
+                logger.exception("Authorization Failed while reading file %s - %s" %(file, e.code))
+            else:
+                logger.exception("Problems while getting file %s", file)
+        except:
             logger.exception("Problems while getting file %s", file)
+        finally:
+            try:
+                httpfile.close()
+            except:
+                pass
 
     def getDependencyNode_Text(self, node):
         lista = []
