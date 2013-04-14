@@ -130,7 +130,9 @@ class Package():
             raise Exception('Installation Manager not found installed')
 
         if self.config['repo_option'] == Package.__repoLocal:
-            download.Download(self.config['url'], self.config['fileName'], self.config['target_loc'])
+            download.Download(self.config['url'], self.config['fileName'],
+                              self.config['target_loc'], realm=self.config['url_realm'],
+                              user=self.config['url_user'], passwd=self.config['url_passwd'])
 
         if self.config['packagename'] == Package.__pkg_nameIM:
             InstallationManager.install(os.path.join(self.config['target_loc'],
@@ -192,7 +194,9 @@ class Package():
             if self.config['repo_option'] == Package.__repoLocal:
                 xml = diomreader.XMLReader(url=self.config['url'], file=self.config['dm_file'],
                                 sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'],
-                                packageName=self.config['pkg_name'], version=self.version)
+                                packageName=self.config['pkg_name'], version=self.version,
+                                realm=self.config['realm'], user=self.config['url_user'],
+                                passwd=self.config['url_passwd'])
                 self.config.update(xml.getSWDownloadDetails())
             elif self.config['repo_option'] == Package.__repoOnline:
                 for line in self.imcl_getAvailablePackages(self.config['target_loc']).split("\n"):
@@ -220,9 +224,12 @@ class Package():
     def copy_package(self, packageName):
         xml = diomreader.XMLReader(url=self.config['url'], file=self.config['dm_file'],
                                 sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'],
-                                packageName=packageName, version=self.version)
+                                packageName=packageName, version=self.version,
+                                realm=self.config['realm'], user=self.config['url_user'],
+                                passwd=self.config['url_passwd'])
         self.config.update(xml.getSWDownloadDetails())
-        download.Download(self.config['url'], self.config['fileName'], self.config['target_loc'])
+        download.Download(self.config['url'], self.config['fileName'], self.config['target_loc'],
+                          realm=self.config['url_realm'],user=self.config['url_user'], passwd=self.config['url_passwd'])
         Package.pucl_copy(os.path.join(self.config['install_root'], 'PUCL'), 'copy',
                     os.path.join(self.config['target_loc'],self.config['fileName'].rstrip('.zip')),
                     os.path.join(self.config['pu_local_target'],self.config['packagename']),
