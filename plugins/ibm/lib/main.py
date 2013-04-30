@@ -25,10 +25,9 @@ def main(input):
                                    realm=packageObj.config['url_realm'],user=packageObj.config['url_user'],
                                    passwd=packageObj.config['url_passwd'])
         packageObj.config.update(xml.getSWDownloadDetails())
-        """
-        #print packageObj.config
         # Logic too complicated for dependency. Using simple
         # method
+        logger.info("Verifying dependency")
         if packageObj.config.has_key('dependency') and \
            len(packageObj.config['dependency']) > 0:
             for dicta in packageObj.config['dependency']:
@@ -39,10 +38,23 @@ def main(input):
                 depPackageObj.config.update(depxml.getSWDownloadDetails())
                 #print depPackageObj.config
                 skipFlag = False
-                if os.path.isdir(depPackageObj.config['install_root']):
-                    historyScript = os.path.join(depPackageObj.config['install_root'],'bin/historyInfo.sh')
-                    if os.path.isfile(historyScript):
-                        (ret_code, output) = shell.Shell.runCmd(historyScript)
+                if os.path.isdir(os.path.join(depPackageObj.config['install_root'],'uninstall')):
+                    versionScript = os.path.join(depPackageObj.config['install_root'],'bin/versionInfo.sh')
+                    if os.path.isfile(versionScript):
+                        (ret_code, output) = shell.Shell.runCmd(versionScript, silent='on')
+                        for line in output.split('\n'):
+                            if line.startswith('Version') and line.find('Directory') == -1:
+                                ver = line.split()[-1]
+                                if ver < depPackageObj.config['packageversion']:
+                                    logger.info("Installed Version: %s, Dependency Version: %s" %(ver, depPackageObj.config['packageversion']))
+                                    logger.info("Installing dependency Version: %s" %(depPackageObj.config['packageversion']))
+                                    depPackageObj.install()
+                else:
+                    logger.info("No Installed Version found, Dependency Version: %s" %(depPackageObj.config['packageversion']))
+                    logger.info("Installing dependency Version: %s" %(depPackageObj.config['packageversion']))
+                    depPackageObj.install()
+
+                """
                         l = []
                         for arr in output.split("-----"):
                             if arr.find('Event') > 0:
@@ -54,7 +66,7 @@ def main(input):
                                    arr.find('install') > 0:
                                     skipFlag = True
                                     #depPackageObj.install()
-        """
+                """
         packageObj.install()
     elif input.command == 'rollback':
         packageObj.rollback()

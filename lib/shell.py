@@ -13,14 +13,15 @@ class Shell():
         pass
 
     @staticmethod
-    def runCmd(cmd):
+    def runCmd(cmd, silent='off'):
         logger.info("Executing command: \n%s", cmd)
         proc = subprocess.Popen(cmd, shell=True,
                                 stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         output = ''
         logger.info("Output from SHELL: ")
         for line in proc.stdout.readlines():
-            logger.info(line.decode("utf-8").rstrip(),)
+            if silent == 'off':
+                logger.info(line.decode("utf-8").rstrip(),)
             output += line.decode("utf-8")
         stdout, stderr = proc.communicate()
         ret_code = proc.returncode
