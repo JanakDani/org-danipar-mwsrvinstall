@@ -1,78 +1,189 @@
-* commit afb8fa9e89acd8b2c296d2eb9b69bf77479372d1
-| Author: Janak Dani <Janak.Dani@danipar.com>
-| Date:   Sat Feb 3 06:52:48 2007 -0500
-| 
-|     updated diom files
-|  
-* commit d410af7b62843b53ec7c7050ab27039daa28a4fe
-| Author: Janak Dani <Janak.Dani@danipar.com>
-| Date:   Sat Feb 3 06:51:23 2007 -0500
-| 
-|     Enabled default versioning
-|    
-*   commit f4eae1eefde46c2553de585899e34d1efdcc2736
-|\  Merge: c2f0e82 1b2c275
+*   commit dca61d618c15fe71eae08dbd57a092a8bd6af34f
+|\  Merge: 8fc956b 6bd3134
 | | Author: Janak Dani <Janak.Dani@danipar.com>
-| | Date:   Fri Feb 2 21:22:35 2007 -0500
+| | Date:   Mon Apr 29 22:59:25 2013 -0400
 | | 
-| |     Merge branch 'feature-changediom'
+| |     Merge branch 'develop'
+| |     
+| *   commit 6bd3134998ba164d0b47aa0bd687545eabb8dbbc
+| |\  Merge: c6eb924 aa7c1c8
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Mon Apr 29 22:56:39 2013 -0400
+| | | 
+| | |     Merge branch 'add_dependency_2' into develop
+| | |    
+| | * commit aa7c1c8db6f88c101e10514f5fe2467fc520c7e4
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
+| |   Date:   Mon Apr 29 22:55:11 2013 -0400
 | |   
-| * commit 1b2c2753dfbcfa1e14b9b45a48d30d90cda6e69e
-| | Author: Janak Dani <Janak.Dani@danipar.com>
-| | Date:   Fri Feb 2 21:21:54 2007 -0500
-| | 
-| |     Updated to 1.1.7
+| |       Dependency-2 for base level and fixpack added
+| |     
+| *   commit c6eb924f539608d5c4be25bc45c85a0c3c2ca041
+| |\  Merge: 1df8ad7 cd66c1d
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Sun Apr 14 18:13:03 2013 -0400
+| | | 
+| | |     Merge branch 'http_auth' into develop
+| | |    
+| | * commit cd66c1da0381ed6ef30bbc8a419a56939d47dc10
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
+| |   Date:   Sun Apr 14 18:12:25 2013 -0400
 | |   
-| * commit 3f9a8a55026b73398bc045a283e354d099a61c7c
-|/  Author: Janak Dani <Janak.Dani@danipar.com>
-|   Date:   Fri Feb 2 21:16:59 2007 -0500
-|   
-|       updated verbiage for diom
-|  
-* commit c2f0e82d2520bb158bc5c436b4ef183801b9cdde
-| Author: Janak Dani <Janak.Dani@danipar.com>
-| Date:   Fri Feb 2 13:13:39 2007 -0500
-| 
-|     updated changelog and version file for 1.1.6
-|    
-*   commit 9a322a2ce43b4d405b61907054f5cb80e4faff22
-|\  Merge: 922cd12 6b0e984
-| | Author: Janak Dani <Janak.Dani@danipar.com>
-| | Date:   Fri Feb 2 11:04:32 2007 -0500
-| | 
-| |     Merge branch 'hotfix-1.4.5'
+| |       Added Basic Security for http connection for pool directory only. Repo still has to be opened without security
 | |   
-| * commit 6b0e984fb2f53eb8cfe61eae63de71da6add456e
-|/  Author: Janak Dani <Janak.Dani@danipar.com>
-|   Date:   Fri Feb 2 11:02:52 2007 -0500
-|   
-|       hot-fix for missing offering id. Bumped up to version 1.1.5
-|  
-* commit 922cd12e6b0fa48e2d10932604771a3ef6ac24d3
-| Author: Janak Dani <Janak.Dani@danipar.com>
-| Date:   Tue Jan 15 23:29:53 2013 -0500
-| 
-|     Modified version.txt
-|    
-*   commit 58b747954645a6765df72342e0ff6f595f56c878
-|\  Merge: 80f0357 2e1516e
+| * commit 1df8ad7c29061f4f3eaceaa18078fc8ffd5e925e
 | | Author: Janak Dani <Janak.Dani@danipar.com>
-| | Date:   Tue Jan 15 23:22:17 2013 -0500
+| | Date:   Sun Apr 14 00:08:27 2013 -0400
 | | 
-| |     Merge branch 'ibmihsfeature'
+| |     added root ini file
+| |     
+| *   commit 0af552ea23c8d96b420a1c892fc1ef67867c1704
+| |\  Merge: 75c9835 e6b2374
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Sat Apr 13 22:02:52 2013 -0400
+| | | 
+| | |     Merge branch 'feature-streamlineProps' into develop
+| | |    
+| | * commit e6b2374e6b5f333a2fa0672b0680891a8cb5886f
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
+| |   Date:   Sat Apr 13 22:02:14 2013 -0400
 | |   
-| * commit 2e1516e8f4260be393df942c7f37dca1e5a06165
-| | Author: Janak Dani <Janak.Dani@danipar.com>
-| | Date:   Tue Jan 15 23:20:52 2013 -0500
-| | 
-| |     Bumped up to version 1.1.5
+| |       Ini file streamlined
+| |     
+| *   commit 75c9835ef5fa8f3b5f470561bc7f594f26a8b054
+| |\  Merge: 15c1c68 8fc956b
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
+|/|   Date:   Sun Apr 7 12:12:32 2013 -0400
 | |   
-| * commit 10df69627a0c70d88f176973a05b84b6864994e9
+| |       Merge branch 'master' into develop
+| |     
+* |   commit 8fc956bf631a42f25826dbb29419af3e66d2f597
+|\ \  Merge: f4eae1e 9acf9d0
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Sun Apr 7 12:11:32 2013 -0400
+| | | 
+| | |     Merge branch 'feature-dependency_diom'
+| | |    
+| * | commit 9acf9d0d745e67e1bb47792f589c52ae1ec56d44
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Sun Apr 7 11:58:11 2013 -0400
+| | | 
+| | |     Updated Version file
+| | |    
+| * | commit 5412e536c0219a07a73855f434a49db3b2d57d56
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Sun Apr 7 11:56:34 2013 -0400
+| | | 
+| | |     Updated system time that was referring to 2007
+| | |    
+| * | commit 2035ef4a5002dcfbedf7510d24f16dcd23a515ac
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
+| |   Date:   Mon Feb 12 09:56:34 2007 -0500
+| |   
+| |       dependency feature added partially, but feature is turned off because of side effect
+| |     
+| *   commit 15c1c68d04a0b8958f1507711f5853ec426ce261
+| |\  Merge: 031574d 734c1ae
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Sat Feb 3 06:59:22 2007 -0500
+| | | 
+| | |     Merge branch 'feature-defaultversion' into develop
+| | |    
+| | * commit 734c1ae4b2b4cec07cc1d84f9801a3f8d8b4b9e3
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Sat Feb 3 06:58:39 2007 -0500
+| | | 
+| | |     updated version/changelog
+| | |    
+| | * commit afb8fa9e89acd8b2c296d2eb9b69bf77479372d1
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Sat Feb 3 06:52:48 2007 -0500
+| | | 
+| | |     updated diom files
+| | |    
+| | * commit d410af7b62843b53ec7c7050ab27039daa28a4fe
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
+|/|   Date:   Sat Feb 3 06:51:23 2007 -0500
+| |   
+| |       Enabled default versioning
+| |     
+| *   commit 031574d9931ddc78eab4e5ca9228d73067fa57fb
+| |\  Merge: e48267c f4eae1e
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
+|/|   Date:   Fri Feb 2 21:29:48 2007 -0500
+| |   
+| |       Merge branch 'master' into develop
+| |     
+* |   commit f4eae1eefde46c2553de585899e34d1efdcc2736
+|\ \  Merge: c2f0e82 1b2c275
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Fri Feb 2 21:22:35 2007 -0500
+| | | 
+| | |     Merge branch 'feature-changediom'
+| | |    
+| * | commit 1b2c2753dfbcfa1e14b9b45a48d30d90cda6e69e
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Fri Feb 2 21:21:54 2007 -0500
+| | | 
+| | |     Updated to 1.1.7
+| | |    
+| * | commit 3f9a8a55026b73398bc045a283e354d099a61c7c
+|/ /  Author: Janak Dani <Janak.Dani@danipar.com>
+| |   Date:   Fri Feb 2 21:16:59 2007 -0500
+| |   
+| |       updated verbiage for diom
+| |   
+* | commit c2f0e82d2520bb158bc5c436b4ef183801b9cdde
 | | Author: Janak Dani <Janak.Dani@danipar.com>
-| | Date:   Tue Jan 15 23:10:57 2013 -0500
+| | Date:   Fri Feb 2 13:13:39 2007 -0500
 | | 
-| |     Added preferences and properties features to imcl command.
-| |     Also added support for ibmihs.
+| |     updated changelog and version file for 1.1.6
+| |     
+* |   commit 9a322a2ce43b4d405b61907054f5cb80e4faff22
+|\ \  Merge: 922cd12 6b0e984
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Fri Feb 2 11:04:32 2007 -0500
+| | | 
+| | |     Merge branch 'hotfix-1.4.5'
+| | |    
+| * | commit 6b0e984fb2f53eb8cfe61eae63de71da6add456e
+|/ /  Author: Janak Dani <Janak.Dani@danipar.com>
+| |   Date:   Fri Feb 2 11:02:52 2007 -0500
+| |   
+| |       hot-fix for missing offering id. Bumped up to version 1.1.5
+| |   
+* | commit 922cd12e6b0fa48e2d10932604771a3ef6ac24d3
+| | Author: Janak Dani <Janak.Dani@danipar.com>
+| | Date:   Tue Jan 15 23:29:53 2013 -0500
+| | 
+| |     Modified version.txt
+| |     
+* |   commit 58b747954645a6765df72342e0ff6f595f56c878
+|\ \  Merge: 80f0357 2e1516e
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Tue Jan 15 23:22:17 2013 -0500
+| | | 
+| | |     Merge branch 'ibmihsfeature'
+| | |      
+| | *   commit e48267ce3b308c0f5ea10211aeb1b7e4fa4eb091
+| | |\  Merge: a5f1ec8 2e1516e
+| | |/  Author: Janak Dani <Janak.Dani@danipar.com>
+| |/|   Date:   Tue Jan 15 23:30:11 2013 -0500
+| | |   
+| | |       Merge branch 'ibmihsfeature' into develop
+| | |    
+| * | commit 2e1516e8f4260be393df942c7f37dca1e5a06165
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Tue Jan 15 23:20:52 2013 -0500
+| | | 
+| | |     Bumped up to version 1.1.5
+| | |    
+| * | commit 10df69627a0c70d88f176973a05b84b6864994e9
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
+| |   Date:   Tue Jan 15 23:10:57 2013 -0500
+| |   
+| |       Added preferences and properties features to imcl command.
+| |       Also added support for ibmihs.
 | |     
 | *   commit a5f1ec877a91b0ce5423bddd36cece66928e2916
 | |\  Merge: b21d23b 80f0357
