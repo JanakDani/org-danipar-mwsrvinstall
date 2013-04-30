@@ -8,12 +8,14 @@
             </OS>
         </Package>
         <Package NAME="com.ibm.websphere.ND.v80" VERSION="8.0.0.1" BUILD="8.0.1.20110829_1838" SUMMARY="IBM WebSphere Application Server Network Deployment" default="false">
+            <Dependency NAME="com.ibm.websphere.ND.v80" VERSION="8.0.0.0"></Dependency>
             <OS SYSTEM="Linux:x86_32,Linux:x86_64,SunOS:i86pc,SunOS:sun4v">
                 <FILENAME>8.0.0-WS-WAS-FP0000001.zip</FILENAME>
                 <LOCATION>../was/v80</LOCATION>
             </OS>
         </Package>
         <Package NAME="com.ibm.websphere.ND.v80" VERSION="8.0.0.3" BUILD="8.0.3.20120320_0536" SUMMARY="IBM WebSphere Application Server Network Deployment" default="true">
+            <Dependency NAME="com.ibm.websphere.ND.v80" VERSION="8.0.0.0"></Dependency>
             <OS SYSTEM="Linux:x86_32,Linux:x86_64,SunOS:i86pc,SunOS:sun4v">
                 <FILENAME>8.0.0-WS-WAS-FP0000003.zip</FILENAME>
                 <LOCATION>../was/v80</LOCATION>
