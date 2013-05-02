@@ -1,2 +1,2 @@
-*   [31mdca61d6[m -[33m (HEAD, release-1.1.8, master)[m 
-|\   [32m(Mon Apr 29 22:59:25 2013 -0400)[m 
+*   [31m885b329[m -[33m (HEAD, master)[m 
+|\   [32m(Thu May 2 16:57:14 2013 -0400)[m 

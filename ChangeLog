@@ -1,3 +1,22 @@
+*   commit 885b329278e3176d5d8450d14ce96d08dccc6130
+|\  Merge: 91d4118 8aa54f1
+| | Author: Janak Dani <Janak.Dani@danipar.com>
+| | Date:   Thu May 2 16:57:14 2013 -0400
+| | 
+| |     Merge branch 'hfx-1.1.8.1'
+| |   
+| * commit 8aa54f1d30e4f99201954dcd232c3b14ff9c6505
+|/  Author: Janak Dani <Janak.Dani@danipar.com>
+|   Date:   Thu May 2 16:54:47 2013 -0400
+|   
+|       Fixed PU related issues and improved error messages
+|  
+* commit 91d4118de7810171819d2bf5142af7e7e3675f0e
+| Author: Janak Dani <Janak.Dani@danipar.com>
+| Date:   Mon Apr 29 23:05:07 2013 -0400
+| 
+|     Release-1.1.8 ready!
+|    
 *   commit dca61d618c15fe71eae08dbd57a092a8bd6af34f
 |\  Merge: 8fc956b 6bd3134
 | | Author: Janak Dani <Janak.Dani@danipar.com>
