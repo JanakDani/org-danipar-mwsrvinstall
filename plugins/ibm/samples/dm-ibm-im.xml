@@ -2,7 +2,7 @@
 <diom>
     <Vendor NAME="IBM">
         <Package NAME="com.ibm.cic.agent" VERSION="1.6.0" BUILD="1.6.0.20120831_1216" SUMMARY="IBM Installation Manager" default="false">
-            <OS SYSTEM="Linux:x86_32,Linux:x86_64">
+            <OS SYSTEM="Linux:x86_32,Linux:x86_64,Linux:i686">
                 <FILENAME>agent.installer.linux.gtk.x86_1.6.0.20120831_1216.zip</FILENAME>
                 <LOCATION>../im/linux/x86_32</LOCATION>
             </OS>
@@ -12,7 +12,7 @@
             </OS>
         </Package>
         <Package NAME="com.ibm.cic.agent" VERSION="1.5.3" BUILD="1.5.3000.20120531_1954" SUMMARY="IBM Installation Manager" default="true">
-            <OS SYSTEM="Linux:x86_32,Linux:x86_64">
+            <OS SYSTEM="Linux:x86_32,Linux:x86_64,Linux:i686">
                 <FILENAME>agent.installer.linux.gtk.x86_1.5.3000.20120531_1954.zip</FILENAME>
                 <LOCATION>../im/linux/x86_32</LOCATION>
             </OS>
@@ -22,7 +22,7 @@
             </OS>
         </Package>
         <Package NAME="com.ibm.cic.agent" VERSION="1.5.2" BUILD="1.5.2000.20120223_0907" SUMMARY="IBM Installation Manager" default="false">
-            <OS SYSTEM="Linux:x86_32,Linux:x86_64">
+            <OS SYSTEM="Linux:x86_32,Linux:x86_64,Linux:i686">
                 <FILENAME>agent.installer.linux.gtk.x86_1.5.2000.20120223_0907.zip</FILENAME>
                 <LOCATION>../im/linux/x86_32</LOCATION>
             </OS>
@@ -32,7 +32,7 @@
             </OS>
         </Package>
         <Package NAME="com.ibm.cic.agent" VERSION="1.4.4" BUILD="1.4.4000.20110525_1254" SUMMARY="IBM Installation Manager" default="false">
-            <OS SYSTEM="Linux:x86_32,Linux:x86_64">
+            <OS SYSTEM="Linux:x86_32,Linux:x86_64,Linux:i686">
                 <FILENAME>agent.installer.linux.gtk.x86_1.4.4000.20110525_1254.zip</FILENAME>
                 <LOCATION>../im/linux/x86_32</LOCATION>
             </OS>
