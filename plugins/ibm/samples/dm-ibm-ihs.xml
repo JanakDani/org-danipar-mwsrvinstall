@@ -2,13 +2,13 @@
 <diom>
     <Vendor NAME="IBM">
         <Package NAME="com.ibm.websphere.IHS.v80" VERSION="8.0.0.0" BUILD="8.0.0.20110503_0200" SUMMARY="IBM HTTP Server" default="true">
-            <OS SYSTEM="Linux:x86_32,Linux:x86_64,SunOS:i86pc,SunOS:sun4v">
+            <OS SYSTEM="Linux:x86_32,Linux:x86_64,SunOS:i86pc,SunOS:sun4v,Linux:i686">
                 <FILENAME>com.ibm.websphere.WCT.v80.zip</FILENAME>
                 <LOCATION>../was/v80</LOCATION>
             </OS>
         </Package>
         <Package NAME="com.ibm.websphere.IHS.v85" VERSION="8.5.0.0" BUILD="8.5.0.20120501_1108" SUMMARY="IBM HTTP Server" default="true">
-            <OS SYSTEM="Linux:x86_32,Linux:x86_64,SunOS:i86pc,SunOS:sun4v">
+            <OS SYSTEM="Linux:x86_32,Linux:x86_64,SunOS:i86pc,SunOS:sun4v,Linux:i686">
                 <FILENAME>com.ibm.websphere.WCT.v85.zip</FILENAME>
                 <LOCATION>../was/v85</LOCATION>
             </OS>

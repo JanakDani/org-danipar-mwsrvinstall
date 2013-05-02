@@ -67,6 +67,7 @@ def main(input):
                                     skipFlag = True
                                     #depPackageObj.install()
                 """
+        logger.info("Depencency verification completed")
         packageObj.install()
     elif input.command == 'rollback':
         packageObj.rollback()

@@ -225,7 +225,7 @@ class Package():
         xml = diomreader.XMLReader(url=self.config['url'], file=self.config['dm_file'],
                                 sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'],
                                 packageName=packageName, version=self.version,
-                                realm=self.config['realm'], user=self.config['url_user'],
+                                realm=self.config['url_realm'], user=self.config['url_user'],
                                 passwd=self.config['url_passwd'])
         self.config.update(xml.getSWDownloadDetails())
         download.Download(self.config['url'], self.config['fileName'], self.config['target_loc'],
@@ -237,10 +237,12 @@ class Package():
                     )
 
     def delete_package(self, packageName):
-        for line in self.imcl_getAvailablePackages(self.config['pu_local_target']).split("\n"):
+        for line in self.imcl_getAvailablePackages \
+                    (os.path.join(self.config['pu_local_target'],
+                                  packageName)).split("\n"):
             if line == '': continue
             (repo,packageid_ver,displayName,displayVersion) = line.split(" : ")
-            if displayVersion == self.version and str(displayName) == str(packageName):
+            if displayVersion == self.version:
                 self.config['packagename'], self.config['packagebuild'] = packageid_ver.split('_',1)
 
         Package.pucl_delete(os.path.join(self.config['install_root'], 'PUCL'), 'delete',

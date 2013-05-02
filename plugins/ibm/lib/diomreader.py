@@ -91,6 +91,7 @@ class XMLReader():
                     dicta['url'] = os.path.join(self.url, location, fileName)
                 """
 
+        logger.error("System %s is not supported for %s" %(system, self.packageName))
         return dicta
 
 
@@ -119,6 +120,7 @@ class XMLReader():
                             dicta.update(self.getOSNode_Text(packageNode.childNodes))
                             dicta['dependency'] = self.getDependencyNode_Text(packageNode.childNodes)
                             return dicta
+        logger.error("package %s - %s not avaialable at this time" %(self.packageName, self.version))
         return dicta
 
     @staticmethod
