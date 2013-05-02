@@ -12,4 +12,4 @@ if [[ $(echo ${home_dir##*/}) == $(echo ${plg_name} | tr '[:upper:]' '[:lower:]'
 fi
 
 export PYTHONPATH=${home_dir}:${PYTHONPATH}
-python2.7 ${home_dir} ${plg_name} copy-package -profile=PackagingUtility -packageName="IBM WebSphere Application Server Network Deployment" -configFile=/root/bin/mwsrvinstall/examples/pu-wasnd.ini "$@"
+python2.7 ${home_dir} ${plg_name} copy-package -profile=PackagingUtility -packageName="com.ibm.websphere.ND.v80" -configFile=/home/janak/bin/swinstall-1.1.8/plugins/ibm/samples/pu-wasnd.ini "$@"

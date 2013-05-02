@@ -2,13 +2,13 @@
 <diom>
     <Vendor NAME="IBM">
         <Package NAME="com.ibm.cic.packagingUtility" VERSION="1.5.3" BUILD="1.5.3000.20120531_2025" SUMMARY="IBM Packaging Utility" default="true">
-            <OS SYSTEM="Linux:x86_32,Linux:x86_64">
+            <OS SYSTEM="Linux:x86_32,Linux:x86_64,Linux:i686">
                 <FILENAME>pu.offering.disk.linux_1.5.3000.20120531_2025.zip</FILENAME>
                 <LOCATION>../pu/linux</LOCATION>
             </OS>
         </Package>
         <Package NAME="com.ibm.cic.packagingUtility" VERSION="1.5.2" BUILD="1.5.2000.20120303_1844" SUMMARY="IBM Packaging Utility" default="false">
-            <OS SYSTEM="Linux:x86_32,Linux:x86_64">
+            <OS SYSTEM="Linux:x86_32,Linux:x86_64,Linux:i686">
                 <FILENAME>pu.offering.disk.linux_1.5.2000.20120303_1844.zip</FILENAME>
                 <LOCATION>../pu/linux</LOCATION>
             </OS>
