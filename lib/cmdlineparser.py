@@ -74,4 +74,29 @@ class ArgParser():
         ##### SCRIPT completed
         ##############################################################
 
+        ##############################################################
+        ##### ORACLE
+        oracle_parser = main_subparsers.add_parser('ORACLE', help='Oracle Software')
+        oracle_subparsers = oracle_parser.add_subparsers(help='commands', dest='command')
+
+        # A install command
+        oracle_install_parser = oracle_subparsers.add_parser('install', help='Install Software')
+        oracle_install_parser.add_argument('-profile', action='store', required=True, help='profile name')
+        oracle_install_parser.add_argument('-configFile', type=argparse.FileType('r'), required=True, help='Property file')
+        oracle_install_parser.add_argument('-version', required=False, help='Version')
+        oracle_install_parser.add_argument('-patch', required=False, help='Patch(es). Comma separated.')
+
+        # A uninstall command
+        oracle_uninstall_parser = oracle_subparsers.add_parser('uninstall', help='Uninstall software')
+        oracle_uninstall_parser.add_argument('-profile', action='store', required=True, help='profile name')
+        oracle_uninstall_parser.add_argument('-configFile', type=argparse.FileType('r'), required=True, help='Property file')
+        oracle_uninstall_parser.add_argument('-version', required=False, help='Version')
+
+        # A remove patch command
+        oracle_remove_parser = oracle_subparsers.add_parser('remove', help='remove specific patch')
+        oracle_remove_parser.add_argument('-profile', action='store', required=True, help='profile name')
+        oracle_remove_parser.add_argument('-configFile', type=argparse.FileType('r'), required=True, help='Property file')
+        oracle_remove_parser.add_argument('-patch', required=False, help='Patch(es). Comma spearated.')
+
+
         self.options = main_parser.parse_args(sysargv)

@@ -17,7 +17,7 @@ class Download():
             file = os.path.join(target_loc, fileName)
             if not os.path.isfile(file):
                 Download.software(url, target_loc, realm=realm, user=user, passwd=passwd)
-            Download.unzip(file, target_loc)
+            Download.extract(file, target_loc)
             Download.setPermissions(target_loc)
         else:
             logger.exception("fileName not found in configuration")
@@ -31,15 +31,19 @@ class Download():
                 os.chmod(file, stat.S_IRWXU)
 
     @staticmethod
-    def unzip(file, target_loc):
-        if not os.path.isdir(file.rstrip('.zip')):
-            if zipfile.is_zipfile(file):
-                logger.info("Extracting software %s. please wait...", file)
-                zip = zipfile.ZipFile(file)
-                zip.extractall(path=target_loc)
-                logger.info("Software extracted to %s", target_loc)
+    def extract(file, target_loc):
+        logger.info("Extracting software %s. please wait...", file)
+        if file.rsplit('.')[-1] == 'zip':
+            if not os.path.isdir(file.rstrip('.zip')):
+                if zipfile.is_zipfile(file):
+                    logger.info("Zip file found. please wait...")
+                    zip = zipfile.ZipFile(file)
+                    zip.extractall(path=target_loc)
+                    logger.info("Software extracted to %s", target_loc)
+            else:
+                logger.debug("Software %s already found. Skipping unzip ...", file)
         else:
-            logger.debug("Software %s already found. Skipping unzip ...", file)
+            logger.warning("File extension not supported for file %s", file)
 
     @staticmethod
     def software(url, dl_loc, realm=None, user=None, passwd=None):
