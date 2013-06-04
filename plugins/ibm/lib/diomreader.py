@@ -63,14 +63,14 @@ class XMLReader():
         for osNode in node:
             if osNode.nodeName == 'OS':
                 system_arr = osNode.getAttribute('SYSTEM').split(',')
-                #matchFound = False
+                matchFound = False
                 for system in system_arr:
                     if system == ''.join(self.sysName+':'+self.sysBit):
                         fileName = XMLReader._getTextData(osNode.getElementsByTagName('FILENAME')[0].childNodes)
                         location = XMLReader._getTextData(osNode.getElementsByTagName('LOCATION')[0].childNodes)
                         dicta['fileName'] = fileName
                         dicta['url'] = os.path.join(self.url, location, fileName)
-                        #matchFound = True
+                        matchFound = True
                         break
                 #if matchFound:
                     #fileName = XMLReader._getTextData(osNode.getElementsByTagName('FILENAME')[0].childNodes)
@@ -91,7 +91,8 @@ class XMLReader():
                     dicta['url'] = os.path.join(self.url, location, fileName)
                 """
 
-        logger.error("System %s is not supported for %s" %(system, self.packageName))
+        if not matchFound:
+            logger.error("System %s is not supported for %s" %(system, self.packageName))
         return dicta
 
 

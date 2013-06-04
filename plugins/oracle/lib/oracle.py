@@ -4,7 +4,6 @@ import logging
 import sys
 import os
 import stat
-import zipfile
 from lib import *
 import diomreader
 import re
