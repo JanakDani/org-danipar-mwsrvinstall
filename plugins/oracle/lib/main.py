@@ -16,9 +16,14 @@ def main(input):
     """
     logger.info("Input arguments: %s", input)
 
-    if input.__contains__('patch'):
+    ## if uninstall then create input.version with none
+    ## disables uninstall requiring version input for clear understanding
+    if input.command == 'uninstall' and not input.__contains__('version'):
+        input.version = None
+
+    if input.patch != None:
         packageObj = oracle.Package(input.vendorname, input.profile, input.configFile.name, input.patch, True)
-    elif input.__contains__('version'):
+    else:
         packageObj = oracle.Package(input.vendorname, input.profile, input.configFile.name, input.version, False)
 
     if input.command == 'install':
@@ -33,6 +38,22 @@ def main(input):
     elif input.command == 'remove':
         packageObj.remove()
     elif input.command == 'uninstall':
+        logger.info("Presenting user with the confirmation screen for uninstallation")
+        print
+        print "PLEASE CONFIRM BELOW:"
+        print "You are about to uninstall %s. Once uninstalled it cannot \
+                be undone" %(os.path.dirname(packageObj.config['install_root']))
+        input = None
+        while input != 'yes' or input != 'no':
+            input = raw_input("Are you sure (yes/no): ")
+            if input == 'no':
+                sys.exit()
+            elif input == 'yes':
+                logger.info("User chose to uninstall %s", packageObj.config['install_root'])
+                break
+            else:
+                print "Allowed options are (yes/no)"
+        sys.exit()
         packageObj.uninstall()
 
 if __name__ == '__main__':

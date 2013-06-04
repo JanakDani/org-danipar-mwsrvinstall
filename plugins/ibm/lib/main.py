@@ -16,6 +16,10 @@ def main(input):
     """
     logger.info("Input arguments: %s", input)
 
+    ## if uninstall then create input.version with none
+    ## disables uninstall requiring version input for clear understanding
+    if input.command == 'uninstall' and not input.__contains__('version'):
+        input.version = None
     packageObj = ibm.Package(input.vendorname, input.profile, input.configFile.name, input.version)
     if input.command == 'install':
         # Read online and download software
@@ -25,6 +29,7 @@ def main(input):
                                    realm=packageObj.config['url_realm'],user=packageObj.config['url_user'],
                                    passwd=packageObj.config['url_passwd'])
         packageObj.config.update(xml.getSWDownloadDetails())
+        logger.info("Version that will be installed is: %s", packageObj.config['packageversion'])
         # Logic too complicated for dependency. Using simple
         # method
         logger.info("Verifying dependency")
@@ -72,6 +77,20 @@ def main(input):
     elif input.command == 'rollback':
         packageObj.rollback()
     elif input.command == 'uninstall':
+        logger.info("Presenting user with the confirmation screen for uninstallation")
+        print
+        print "PLEASE CONFIRM BELOW:"
+        print "You are about to uninstall %s. Once uninstalled it cannot be undone" %(packageObj.config['install_root'])
+        input = None
+        while input != 'yes' or input != 'no':
+            input = raw_input("Are you sure (yes/no): ")
+            if input == 'no':
+                sys.exit()
+            elif input == 'yes':
+                logger.info("User chose to uninstall %s", packageObj.config['install_root'])
+                break
+            else:
+                print "Allowed options are (yes/no)"
         packageObj.uninstall()
     elif input.command == 'copy-package':
         packageObj.copy_package(input.packageName)

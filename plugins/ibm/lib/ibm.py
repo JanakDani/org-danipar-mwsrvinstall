@@ -4,8 +4,6 @@ import logging
 import sys
 import os
 import stat
-#import configparser
-import zipfile
 from lib import *
 import diomreader
 
@@ -118,13 +116,7 @@ class Package():
                                 scope=[self.config['repo_option']])[self.config['repo_option']])
 
     def install(self):
-        # Read online and download software
-        #xml = diomreader.XMLReader(url=self.config['url'], file=self.config['dm_file'],
-        #                        sysName=self.sysName,sysBit=self.machine,vendorName=self.config['vendorname'],
-        #                        packageName=self.config['pkg_name'], version=self.version)
-        #self.config.update(xml.getSWDownloadDetails())
         #print self.config
-
         if self.config['packagename'] != Package.__pkg_nameIM and \
         not os.path.isdir(self.config['im_install_root']):
             raise Exception('Installation Manager not found installed')
@@ -338,18 +330,3 @@ class Package():
                 " -target " + target
                 )
         (ret_code, output) = shell.Shell.runCmd(cmd)
-
-
-def unzip(file, target_loc):
-    if not os.path.isdir(file.rstrip('.zip')):
-        if zipfile.is_zipfile(file):
-            logger.info("Extracting software %s. please wait...", file)
-            zip = zip = zipfile.ZipFile(file)
-            zip.extractall(path=target_loc)
-            logger.info("Software extracted to %s", target_loc)
-            for dirpath,dirs,fileNames in os.walk(os.path.join(target_loc, file.rstrip('.zip'))):
-                for fileName in fileNames:
-                    file = os.path.join(dirpath, fileName)
-                    os.chmod(file, stat.S_IRWXU)
-    else:
-        logger.debug("Software %s already found. Skipping unzip ...", file)
