@@ -4,6 +4,7 @@ from lib import *
 import logging
 import oracle
 import diomreader
+from plugins.script.lib import *
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',

@@ -55,24 +55,6 @@ class ArgParser():
         ##### IBM completed
         ##############################################################
 
-        ##############################################################
-        ##### SCRIPT
-        script_parser = main_subparsers.add_parser('SCRIPT', help='Scripts bundle')
-        script_subparsers = script_parser.add_subparsers(help='commands', dest='command')
-
-        script_install_parser = script_subparsers.add_parser('install', help='Install script bundle')
-        script_install_parser.add_argument('-profile', action='store', required=True, help='profile name')
-        script_install_parser.add_argument('-configFile', type=argparse.FileType('r'), required=True, help='Property file')
-        script_install_parser.add_argument('-version', required=True, help='Version')
-
-        # A uninstall command
-        script_uninstall_parser = script_subparsers.add_parser('uninstall', help='Uninstall script bundle')
-        script_uninstall_parser.add_argument('-profile', action='store', required=True, help='profile name')
-        script_uninstall_parser.add_argument('-configFile', type=argparse.FileType('r'), required=True, help='Property file')
-        script_uninstall_parser.add_argument('-version', required=False, help='Version')
-
-        ##### SCRIPT completed
-        ##############################################################
 
         ##############################################################
         ##### ORACLE
@@ -98,5 +80,24 @@ class ArgParser():
         oracle_remove_parser.add_argument('-configFile', type=argparse.FileType('r'), required=True, help='Property file')
         oracle_remove_parser.add_argument('-patch', required=True, help='Patch(es). Comma spearated.')
 
+
+        ##############################################################
+        ##### CMPACK
+        cmpack_parser = main_subparsers.add_parser('CMPACK', help='Custom-Made Packages')
+        cmpack_subparsers = cmpack_parser.add_subparsers(help='commands', dest='command')
+
+        cmpack_install_parser = cmpack_subparsers.add_parser('install', help='Copy cmpack bundle')
+        cmpack_install_parser.add_argument('-profile', action='store', required=True, help='profile name')
+        cmpack_install_parser.add_argument('-configFile', type=argparse.FileType('r'), required=True, help='Property file')
+        cmpack_install_parser.add_argument('-version', help='Version')
+
+        # A uninstall command
+        cmpack_uninstall_parser = cmpack_subparsers.add_parser('uninstall', help='Uninstall cmpack bundle')
+        cmpack_uninstall_parser.add_argument('-profile', action='store', required=True, help='profile name')
+        cmpack_uninstall_parser.add_argument('-configFile', type=argparse.FileType('r'), required=True, help='Property file')
+        cmpack_uninstall_parser.add_argument('-version', required=False, help='Version')
+
+        ##### CMPACK completed
+        ##############################################################
 
         self.options = main_parser.parse_args(sysargv)

@@ -8,6 +8,6 @@ if inputArgs.options.vendorname == 'IBM':
 elif inputArgs.options.vendorname == 'ORACLE':
     from plugins.oracle.lib import *
     main.main(inputArgs.options)
-elif inputArgs.options.vendorname == 'SCRIPT':
-    from plugins.script.lib import *
+elif inputArgs.options.vendorname == 'CMPACK':
+    from plugins.cmpack.lib import *
     main.main(inputArgs.options)

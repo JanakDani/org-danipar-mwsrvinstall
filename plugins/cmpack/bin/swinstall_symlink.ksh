@@ -1,6 +1,6 @@
 #!/usr/bin/env ksh
 
-plg_name="SCRIPT"
+plg_name="CMPACK"
 curr_dir=$(cd $(dirname $0); pwd)
 home_dir=${curr_dir%/*}
 root_dir=${curr_dir%/*/*}
@@ -12,4 +12,4 @@ if [[ $(echo ${home_dir##*/}) == $(echo ${plg_name} | tr '[:upper:]' '[:lower:]'
 fi
 
 export PYTHONPATH=${home_dir}:${PYTHONPATH}
-python2.7 ${home_dir} ${plg_name} install -offeringProfile="SWInstall" -configFile=${plg_dir}/samples/common-default.ini "$@"
+python2.7 ${home_dir} ${plg_name} install -profile="swinstall-bin-symlink" -configFile=${plg_dir}/samples/common-default.ini "$@"

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<diom>
+    <Vendor NAME="CMPACK">
+        <Package NAME="com.danipar.swinstall" VERSION="1.1.3" BUILD="1.1.3" SUMMARY="SWInstall Script Bundle" default="true">
+            <OS SYSTEM="Linux:x86_32,Linux:x86_64,SunOS:i86pc,SunOS:sun4v,Linux:i686">
+                <FILENAME>swinstall-1.1.3.zip</FILENAME>
+                <LOCATION>../common</LOCATION>
+            </OS>
+        </Package>
+        <Package NAME="com.danipar.swinstall" VERSION="1.1.2" BUILD="1.1.2" SUMMARY="SWInstall Script Bundle" default="false">
+            <OS SYSTEM="Linux:x86_32,Linux:x86_64,SunOS:i86pc,SunOS:sun4v,Linux:i686">
+                <FILENAME>swinstall-1.1.2.zip</FILENAME>
+                <LOCATION>../common</LOCATION>
+            </OS>
+        </Package>
+    </Vendor>
+</diom>
