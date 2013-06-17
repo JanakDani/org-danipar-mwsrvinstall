@@ -10,7 +10,7 @@ from xml.dom.minidom import parse, parseString
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt="")
-logger = logging.getLogger("ibm.diomreader")
+logger = logging.getLogger("cmpack.diomreader")
 
 class XMLReader():
     def __init__(self,url,file,sysName,sysBit,vendorName,packageName,version=None,

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<diom>
+    <Vendor NAME="ORACLE">
+        <Package NAME="com.oracle.weblogic.v121" VERSION="12.1.1" BUILD="12.1.1" SUMMARY="Oracle Weblogic Application Server" default="true">
+            <OS SYSTEM="Linux:x86_32,Linux:x86_64,SunOS:i86pc,SunOS:sun4v,Linux:i686">
+                <FILENAME>wls1211_generic.jar</FILENAME>
+                <LOCATION>../weblogic/12.1</LOCATION>
+            </OS>
+        </Package>
+    </Vendor>
+</diom>

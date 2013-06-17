@@ -1,6 +1,6 @@
 #!/usr/bin/env ksh
 
-plg_name="IBM"
+plg_name="ORACLE"
 curr_dir=$(cd $(dirname $0); pwd)
 home_dir=${curr_dir%/*}
 root_dir=${curr_dir%/*/*}
@@ -12,4 +12,4 @@ if [[ $(echo ${home_dir##*/}) == $(echo ${plg_name} | tr '[:upper:]' '[:lower:]'
 fi
 
 export PYTHONPATH=${home_dir}:${PYTHONPATH}
-python2.7 ${home_dir} ${plg_name} copy-package -profile=PackagingUtility -packageName="com.ibm.websphere.ND.v80" -configFile=${HOME}/bin/swinstall-1.1.8/plugins/ibm/samples/pu-wasnd.ini "$@"
+python2.7 ${home_dir} ${plg_name} uninstall -profile=WLS121 -configFile=${plg_dir}/samples/wls-default.ini "$@"
