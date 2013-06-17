@@ -1,28 +1,93 @@
-*   commit 885b329278e3176d5d8450d14ce96d08dccc6130
-|\  Merge: 91d4118 8aa54f1
+*   commit bd2c07e58c85fcbc90df465c047107ee48880d8d
+|\  Merge: 02988aa 6036779
 | | Author: Janak Dani <Janak.Dani@danipar.com>
-| | Date:   Thu May 2 16:57:14 2013 -0400
-| | 
-| |     Merge branch 'hfx-1.1.8.1'
-| |   
-| * commit 8aa54f1d30e4f99201954dcd232c3b14ff9c6505
-|/  Author: Janak Dani <Janak.Dani@danipar.com>
-|   Date:   Thu May 2 16:54:47 2013 -0400
-|   
-|       Fixed PU related issues and improved error messages
-|  
-* commit 91d4118de7810171819d2bf5142af7e7e3675f0e
-| Author: Janak Dani <Janak.Dani@danipar.com>
-| Date:   Mon Apr 29 23:05:07 2013 -0400
-| 
-|     Release-1.1.8 ready!
-|    
-*   commit dca61d618c15fe71eae08dbd57a092a8bd6af34f
-|\  Merge: 8fc956b 6bd3134
-| | Author: Janak Dani <Janak.Dani@danipar.com>
-| | Date:   Mon Apr 29 22:59:25 2013 -0400
+| | Date:   Sun Jun 16 22:23:40 2013 -0400
 | | 
 | |     Merge branch 'develop'
+| |   
+| * commit 60367790fff531a11e11767740648864f7292ec9
+| | Author: Janak Dani <Janak.Dani@danipar.com>
+| | Date:   Sun Jun 16 22:21:36 2013 -0400
+| | 
+| |     Updated cmpack with overwrite, copy and symlink features
+| |     
+| *   commit 098fc67811b7d443fafd3e1f3aa4e3fe0fc8c208
+| |\  Merge: 577bfd3 af3f5d6
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Mon Jun 3 22:00:44 2013 -0400
+| | | 
+| | |     Merge branch 'feat-updateUninstall' into develop
+| | |    
+| | * commit af3f5d683f561a86ac8e04eb1ec65fd2e8d2a385
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
+| |   Date:   Mon Jun 3 21:59:56 2013 -0400
+| |   
+| |       Added manual confirmation for uninstalling the product
+| |   
+| * commit 577bfd3feb614f94045eca1ebba2ce3e825ae675
+| | Author: Janak Dani <Janak.Dani@danipar.com>
+| | Date:   Mon Jun 3 17:46:43 2013 -0400
+| | 
+| |     added sample weblogic diom file.
+| |     
+| *   commit 9e3f3430738d789bc4f99b505bb20e2881143e43
+| |\  Merge: 47e3d85 67d313e
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Mon Jun 3 17:39:44 2013 -0400
+| | | 
+| | |     Merge branch 'feat-weblogic' into develop
+| | |    
+| | * commit 67d313e503526208c9a15f7929be378c9ed50085
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
+| |   Date:   Mon Jun 3 17:32:36 2013 -0400
+| |   
+| |       Added plugin for Oracle. Support for WebLogic.
+| |     
+| *   commit 47e3d856638fd8a8b576b90bbf21f7b274b45402
+| |\  Merge: ac2d707 02988aa
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
+|/|   Date:   Thu May 2 17:05:08 2013 -0400
+| |   
+| |       Merge branch 'master' into develop
+| |   
+* | commit 02988aaac245926a17b563d476585c03ee00dc74
+| | Author: Janak Dani <Janak.Dani@danipar.com>
+| | Date:   Thu May 2 17:00:14 2013 -0400
+| | 
+| |     Updated version/changeLog for release-1.1.8.1
+| |     
+* |   commit 885b329278e3176d5d8450d14ce96d08dccc6130
+|\ \  Merge: 91d4118 8aa54f1
+| | | Author: Janak Dani <Janak.Dani@danipar.com>
+| | | Date:   Thu May 2 16:57:14 2013 -0400
+| | | 
+| | |     Merge branch 'hfx-1.1.8.1'
+| | |    
+| * | commit 8aa54f1d30e4f99201954dcd232c3b14ff9c6505
+|/ /  Author: Janak Dani <Janak.Dani@danipar.com>
+| |   Date:   Thu May 2 16:54:47 2013 -0400
+| |   
+| |       Fixed PU related issues and improved error messages
+| |     
+| *   commit ac2d707decc23a73c6351a891910b012433d026e
+| |\  Merge: 6bd3134 91d4118
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
+|/|   Date:   Mon Apr 29 23:18:34 2013 -0400
+| |   
+| |       Merge branch 'master' into develop
+| |   
+* | commit 91d4118de7810171819d2bf5142af7e7e3675f0e
+| | Author: Janak Dani <Janak.Dani@danipar.com>
+| | Date:   Mon Apr 29 23:05:07 2013 -0400
+| | 
+| |     Release-1.1.8 ready!
+| |     
+* |   commit dca61d618c15fe71eae08dbd57a092a8bd6af34f
+|\ \  Merge: 8fc956b 6bd3134
+| |/  Author: Janak Dani <Janak.Dani@danipar.com>
+| |   Date:   Mon Apr 29 22:59:25 2013 -0400
+| |   
+| |       Merge branch 'develop'
 | |     
 | *   commit 6bd3134998ba164d0b47aa0bd687545eabb8dbbc
 | |\  Merge: c6eb924 aa7c1c8
